@@ -4,7 +4,31 @@ import { Link } from 'react-router-dom'
 
 export class NavBar extends Component {
 
-    state = {}
+    userLoggedIn = () =>{
+        if (Object.keys(this.props.currentUser).length !== 0) {
+            return (
+                <Menu.Menu position='right'>
+                    <Menu.Item as={Link} to ={`/user/${this.props.currentUser.id}`} >
+                        Profile
+                    </Menu.Item>
+                    <Menu.Item>
+                        Logout
+                    </Menu.Item>
+                </Menu.Menu >
+            )
+        } else {
+            return (
+                <Menu.Menu position='right'>
+                    <Menu.Item>
+                        Sign Up
+                    </Menu.Item>
+                    <Menu.Item>
+                        Login
+                    </Menu.Item>
+                </Menu.Menu >
+            )
+}
+    }
 
     render() {
         return (
@@ -16,14 +40,7 @@ export class NavBar extends Component {
                 <Menu.Item>
                     Tomorrow's Forecast
                 </Menu.Item>
-                <Menu.Menu position='right'>
-                    <Menu.Item>
-                        Profile
-                    </Menu.Item>
-                    <Menu.Item>
-                        Logout
-                    </Menu.Item>
-                </Menu.Menu>
+                {this.userLoggedIn()}
             </Menu>
         )
     }
