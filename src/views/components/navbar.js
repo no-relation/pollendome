@@ -20,14 +20,20 @@ export class NavBar extends Component {
         return month + ' ' + numDay + ', ' + year
     }
 
-    userLoggedIn = () =>{
+    handleClick = (e) => {
+        this.props.logout()
+    }
+
+    userLoggedIn = () => {
         if (Object.keys(this.props.currentUser).length !== 0) {
             return (
                 <Menu.Menu position='right'>
                     <Menu.Item as={Link} to ={`/user/${this.props.currentUser.id}`} >
                         Profile
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item as={Link} to='/'
+                        name="logout"
+                        onClick={this.handleClick} >
                         Logout
                     </Menu.Item>
                 </Menu.Menu >
