@@ -4,6 +4,22 @@ import { Link } from 'react-router-dom'
 
 export class NavBar extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date()
+        };
+    }
+
+    formatMonthDayYear = (date) => {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        const month = months[this.state.date.getMonth()]
+        const numDay = this.state.date.getDate()
+        const year = this.state.date.getFullYear()
+
+        return month + ' ' + numDay + ', ' + year
+    }
+
     userLoggedIn = () =>{
         if (Object.keys(this.props.currentUser).length !== 0) {
             return (
@@ -34,11 +50,16 @@ export class NavBar extends Component {
         return (
             <Menu>
                 <Menu.Item as={Link} to='/'>
-                    WELCOME TO<br/>
-                    POLLENDROME
+                    <strong>
+                        WELCOME TO<br />
+                        POLLENDROME
+                    </strong>
                 </Menu.Item>
                 <Menu.Item>
                     Tomorrow's Forecast
+                </Menu.Item>
+                <Menu.Item>
+                    {this.formatMonthDayYear(this.state.date)}
                 </Menu.Item>
                 {this.userLoggedIn()}
             </Menu>
