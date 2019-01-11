@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { Router } from "react-router-dom";
+import { Switch, Route } from "react-router";
+import history from "./state/history";
+import { User } from "./views/user";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>App Goes here</h1>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route path="/" component={User} />
+        </Switch>
+      </Router>
     );
   }
 }

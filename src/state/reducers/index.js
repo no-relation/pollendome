@@ -1,13 +1,6 @@
-export const reducer = function (currentState, action) {
-    const newState = { ...currentState }
+import { combineReducers } from "redux";
+import { users_reducer } from "./users_reducer"
 
-    switch (action.type) {
-        case 'VALUE':
-            return newState
-            break;
-    
-        default:
-            return newState
-            break;
-    }
-}
+export const rootReducer = combineReducers({
+    users: users_reducer,
+})
