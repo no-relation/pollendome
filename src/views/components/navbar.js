@@ -5,7 +5,18 @@ import { Link } from 'react-router-dom'
 export class NavBar extends Component {
 
     userLoggedIn = () =>{
-        if (true) {
+        if (Object.keys(this.props.currentUser).length !== 0) {
+            return (
+                <Menu.Menu position='right'>
+                    <Menu.Item as={Link} to ={`/user/${this.props.currentUser.id}`} >
+                        Profile
+                    </Menu.Item>
+                    <Menu.Item>
+                        Logout
+                    </Menu.Item>
+                </Menu.Menu >
+            )
+        } else {
             return (
                 <Menu.Menu position='right'>
                     <Menu.Item>
@@ -16,18 +27,7 @@ export class NavBar extends Component {
                     </Menu.Item>
                 </Menu.Menu >
             )
-        } else {
-            return (
-                <Menu.Menu position='right'>
-                    <Menu.Item>
-                        Profile
-                    </Menu.Item>
-                    <Menu.Item>
-                        Logout
-                    </Menu.Item>
-                </Menu.Menu >
-            )
-        }
+}
     }
 
     render() {
