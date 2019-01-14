@@ -20,7 +20,7 @@ class _UserForm extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         if (this.props.location.pathname === `/user/${this.props.match.params.id}`) {
-            this.props.editUser(this.state)
+            this.props.editUser({ ...this.state, id: this.props.currentUser.id })
             this.props.closeForm()
         }
         if (this.props.location.pathname === '/signup') {

@@ -6,11 +6,11 @@ import history from "./state/history";
 import { NavBar } from "./views/components/navbar";
 import { Home } from "./views/containers/home";
 import { User } from "./views/components/user";
+import { UserList } from "./views/components/userlist"
 import { Login } from "./views/components/login";
 import { Signup } from "./views/containers/signup";
 
 class _App extends Component {
-
   render() {
     return (
       <Router history={history}>
@@ -20,6 +20,7 @@ class _App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />
+            <Route path="/user/" component={UserList} />
             <Route path="/" component={Home} />
           </Switch>
         </div>

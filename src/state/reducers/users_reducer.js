@@ -7,10 +7,9 @@ export const users_reducer = function(prevState = {}, action) {
             return prevState
 
         case "EDIT_USER":
-            return prevState
+            return {...prevState, currentUser: action.payload}
 
         case "LOGIN_USER":
-        console.log(action)
             localStorage.setItem("token", action.payload.token)
             return {...prevState, currentUser: action.payload}
 

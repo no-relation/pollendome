@@ -28,6 +28,7 @@ class _User extends Component {
                     </Header>
                     <br/>
                     <Button content='Edit' primary onClick={() => this.setState({ showEdit: true })} />
+                    <Button content="Delete" color='red' onClick={() => this.props.deleteUser(this.props.currentUser.id)} />
                 </Container>
             )
         }
