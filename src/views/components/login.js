@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Form, Container, Icon, Header } from 'semantic-ui-react'
+import { actions } from '../../state/actions';
+import { connect } from 'react-redux';
+import history from "../../state/history";
 
-export class Login extends Component {
+class _Login extends Component {
 
     state = {
         email: '',
@@ -16,11 +19,8 @@ export class Login extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-
-        this.setState({ 
-            email: '',
-            password: ''
-        })
+        this.props.login(this.state)
+        history.push('/')
     }
 
     render(){
@@ -28,10 +28,10 @@ export class Login extends Component {
             <Container>
                 <Header as='h2' icon>
                     <Icon name='sign-in' />
-                    Sign In
+                    Log In
                     <Header.Subheader>How are you feeling today?</Header.Subheader>
                 </Header>
-                <Form>
+                <Form onSubmit={this.handleOnSubmit} >
                     <Form.Input fluid 
                         name='email' 
                         label='Email' 
@@ -41,7 +41,7 @@ export class Login extends Component {
                     <Form.Input fluid 
                         name='password' 
                         label='Password' 
-                        value={this.state.email} 
+                        value={this.state.password} 
                         type='password' 
                         onChange={this.handleOnChange} 
                         />
@@ -52,3 +52,4 @@ export class Login extends Component {
     }
 }
 
+export const Login = connect(null, actions)(_Login)

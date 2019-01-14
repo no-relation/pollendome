@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Header, Icon, Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import { UserForm } from '../components/userForm';
+import { actions } from '../../state/actions';
 
-export class Signup extends Component {
+class _Signup extends Component {
     render() {
         return (
             <Container>
@@ -11,10 +13,11 @@ export class Signup extends Component {
                     Sign Up
                     <Header.Subheader>Over time, you can learn what pollens or molds you're allergic to</Header.Subheader>
                 </Header>
-                <UserForm currentUser={{username: '', email: ''}} />
+                <UserForm currentUser={{username: '', email: ''}} addUser={this.props.addUser} />
             </Container>
         );
     }
 }
 
-// export default Signup;
+
+export const Signup = connect(null, actions)(_Signup);
