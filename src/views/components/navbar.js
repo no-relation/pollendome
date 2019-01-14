@@ -41,10 +41,10 @@ export class NavBar extends Component {
         } else {
             return (
                 <Menu.Menu position='right'>
-                    <Menu.Item>
+                    <Menu.Item as={Link} to='/signup' >
                         Sign Up
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item as={Link} to='/login' >
                         Login
                     </Menu.Item>
                 </Menu.Menu >

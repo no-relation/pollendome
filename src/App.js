@@ -7,6 +7,7 @@ import { NavBar } from "./views/components/navbar";
 import { Home } from "./views/containers/home";
 import { User } from "./views/components/user";
 import { Login } from "./views/components/login";
+import { Signup } from "./views/containers/signup";
 
 class _App extends Component {
 
@@ -16,6 +17,7 @@ class _App extends Component {
         <div>
           <NavBar currentUser = {this.props.currentUser} logout = {this.props.logout} />
           <Switch>
+            <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />
             <Route path="/" component={Home} />

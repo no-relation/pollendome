@@ -1,19 +1,40 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Form } from 'semantic-ui-react'
+import { Header, Container, Icon, Button } from 'semantic-ui-react'
+import { UserForm } from "./userForm";
 
 class _User extends Component {
+
+    state = {
+        showEdit: false
+    }
+
+    dataOrEdit = () => {
+        if (this.state.showEdit) {
+            return <UserForm currentUser={this.props.currentUser} closeForm={() => this.setState({ showEdit: false }) } />
+            
+        } else {
+            return(
+                <Container>
+                    <Header as='h2' icon>
+                        <Icon name='user circle' />
+                        {this.props.currentUser.username}
+                    </Header>
+                    <br/>
+                    <Header as='h4' icon>
+                        <Icon name='mail' />
+                        {this.props.currentUser.email}
+                    </Header>
+                    <br/>
+                    <Button content='Edit' primary onClick={() => this.setState({ showEdit: true })} />
+                </Container>
+            )
+        }
+    }
+
     render() {
         return(
-            <Form>
-                <Form.Field>
-                    <label >{this.props.currentUser.username} </label>
-                </Form.Field>
-                <Form.Field>
-                    <label >{this.props.currentUser.email} </label>
-                </Form.Field>
-                <Form.Button>Edit</Form.Button>
-            </Form>
+            this.dataOrEdit()
         )
     }
 }
