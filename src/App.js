@@ -6,6 +6,7 @@ import history from "./state/history";
 import { NavBar } from "./views/components/navbar";
 import { Home } from "./views/containers/home";
 import { User } from "./views/components/user";
+import { Login } from "./views/components/login";
 
 class _App extends Component {
 
@@ -15,6 +16,7 @@ class _App extends Component {
         <div>
           <NavBar currentUser = {this.props.currentUser} logout = {this.props.logout} />
           <Switch>
+            <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />
             <Route path="/" component={Home} />
           </Switch>

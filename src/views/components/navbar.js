@@ -54,7 +54,7 @@ export class NavBar extends Component {
 
     render() {
         return (
-            <Menu>
+            <Menu inverted>
                 <Menu.Item as={Link} to='/'>
                     <strong>
                         WELCOME TO<br />
