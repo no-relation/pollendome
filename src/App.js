@@ -6,14 +6,19 @@ import history from "./state/history";
 import { NavBar } from "./views/components/navbar";
 import { Home } from "./views/containers/home";
 import { User } from "./views/components/user";
+import { Login } from "./views/components/login";
+import { Signup } from "./views/containers/signup";
 
 class _App extends Component {
+
   render() {
     return (
       <Router history={history}>
         <div>
-          <NavBar currentUser = {this.props.currentUser}/>
+          <NavBar currentUser = {this.props.currentUser} logout = {this.props.logout} />
           <Switch>
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />
             <Route path="/" component={Home} />
           </Switch>
@@ -27,4 +32,8 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser
 })
 
-export const App = connect(mapStateToProps)(_App);
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch({ type: "LOGOUT_USER" })
+})
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(_App);

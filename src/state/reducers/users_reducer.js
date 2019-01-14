@@ -9,6 +9,12 @@ export const users_reducer = function(prevState = {}, action) {
         case "EDIT_USER":
             return prevState
 
+        case "LOGIN_USER":
+            return {...prevState, currentUser: action.payload}
+
+        case "LOGOUT_USER":
+            return {...prevState, currentUser: ''}
+
         default:
             return prevState
     }
