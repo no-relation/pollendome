@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react'
+import { withRouter } from "react-router";
+import history from '../../state/history';
 
-export class UserForm extends Component {
+class _UserForm extends Component {
 
     state = {
         username: this.props.currentUser.username,
@@ -17,8 +19,14 @@ export class UserForm extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-
-        this.props.closeForm()
+        if (this.props.location.pathname === `/user/${this.props.match.params.id}`) {
+            this.props.editUser(this.state)
+            this.props.closeForm()
+        }
+        if (this.props.location.pathname === '/signup') {
+            this.props.addUser(this.state)
+            history.push('/')
+        }
     }
 
     render() {
@@ -49,4 +57,4 @@ export class UserForm extends Component {
     }
 }
 
-// export default userForm;
+export const UserForm = withRouter(_UserForm)
