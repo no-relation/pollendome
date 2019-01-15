@@ -1,6 +1,6 @@
-import { API } from './API';
+import { API } from '../API';
 
-export const actions = {
+export const user_actions = {
 
     login(loggingUser) {
         return function(dispatch){
@@ -62,5 +62,9 @@ export const actions = {
                 .then(resp => resp.json())
                 .then(user => dispatch({type: "EDIT_USER", payload: user}))
         }
-    }
+    },
+
+    // getDays(payload) {
+    //     return
+    // }
 }

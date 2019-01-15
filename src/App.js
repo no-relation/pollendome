@@ -9,7 +9,7 @@ import { User } from "./views/components/user";
 import { UserList } from "./views/components/userlist"
 import { Login } from "./views/components/login";
 import { Signup } from "./views/containers/signup";
-import { actions } from './state/actions';
+import { user_actions } from './state/actions/user_actions';
 import { DaysContainer } from './views/containers/days_container';
 
 class _App extends Component {
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser
 })
 
-export const App = connect(mapStateToProps, actions)(_App);
+export const App = connect(mapStateToProps, user_actions)(_App);

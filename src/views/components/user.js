@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { Header, Container, Icon, Button } from 'semantic-ui-react'
 import { UserForm } from "./userForm";
-import { actions } from '../../state/actions';
+import { user_actions } from '../../state/actions/user_actions';
 
 class _User extends Component {
 
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
     currentUser: state.currentUser
 })
 
-export const User = connect(mapStateToProps, actions)(_User)
+export const User = connect(mapStateToProps, user_actions)(_User)

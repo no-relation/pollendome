@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Container, Icon, Header } from 'semantic-ui-react'
-import { actions } from '../../state/actions';
+import { user_actions } from '../../state/actions/user_actions';
 import { connect } from 'react-redux';
 import history from "../../state/history";
 
@@ -52,4 +52,4 @@ class _Login extends Component {
     }
 }
 
-export const Login = connect(null, actions)(_Login)
+export const Login = connect(null, user_actions)(_Login)
