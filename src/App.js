@@ -9,6 +9,7 @@ import { User } from "./views/components/user";
 import { UserList } from "./views/components/userlist"
 import { Login } from "./views/components/login";
 import { Signup } from "./views/containers/signup";
+import { actions } from './state/actions';
 
 class _App extends Component {
   render() {
@@ -33,8 +34,4 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch({ type: "LOGOUT_USER" })
-})
-
-export const App = connect(mapStateToProps, mapDispatchToProps)(_App);
+export const App = connect(mapStateToProps, actions)(_App);

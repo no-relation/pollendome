@@ -17,21 +17,12 @@ export class UserList extends Component {
             });
     }
 
-    deleteUser = (id) => {
-        fetch(`${API}/users/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        })
-    }
-
     render() {
         return (
             <Container>
-                {this.state.users.map( user => {
+                {this.state.users.map( (user, index) => {
                     return  (
-                        <Card>
+                        <Card key={index} >
                             <Card.Content>
                                 <Card.Header as={Link} to={`/user/${user.id}`} >{user.username}</Card.Header>
                                 <Card.Description>{user.email}</Card.Description>
