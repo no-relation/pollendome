@@ -58,11 +58,11 @@ export class NavBar extends Component {
                 <Menu.Item as={Link} to='/'>
                     <strong>
                         WELCOME TO<br />
-                        POLLENDROME
+                        POLLENDOME
                     </strong>
                 </Menu.Item>
                 <Menu.Item>
-                    Tomorrow's Forecast
+                    Forecast
                 </Menu.Item>
                 <Menu.Item>
                     {this.formatMonthDayYear(this.state.date)}

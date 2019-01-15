@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Card, Icon } from 'semantic-ui-react';
+import { Container, Card } from 'semantic-ui-react';
 import { API } from '../../state/API';
 import { Link } from 'react-router-dom';
 

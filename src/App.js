@@ -10,6 +10,7 @@ import { UserList } from "./views/components/userlist"
 import { Login } from "./views/components/login";
 import { Signup } from "./views/containers/signup";
 import { actions } from './state/actions';
+import { DaysContainer } from './views/containers/days_container';
 
 class _App extends Component {
   render() {
@@ -18,6 +19,7 @@ class _App extends Component {
         <div>
           <NavBar currentUser = {this.props.currentUser} logout = {this.props.logout} />
           <Switch>
+            <Route path="/days" component={DaysContainer} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />
