@@ -1,4 +1,4 @@
-Frontend for Pollendrome, a pollen count forecast app (currently only for the city of Houston, TX.) 
+Frontend for Pollendome, a pollen count forecast app (currently only for the city of Houston, TX.) 
 
 Backend is over [here](https://github.com/no-relation/pollendome-server)
 
