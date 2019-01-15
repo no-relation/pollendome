@@ -1,6 +1,6 @@
 Frontend for Pollendrome, a pollen count forecast app (currently only for the city of Houston, TX.) 
 
-Read more about it [here](https://github.com/no-relation/pollendrome)
+Backend is over [here](https://github.com/no-relation/pollendome-server)
 
 <!--
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
