@@ -12,7 +12,6 @@ export const users_reducer = function(prevState = {}, action) {
             return {...prevState, currentUser: ''}
 
         case "GET_DAYS":
-            console.log('in reducer', action)
             return {...prevState, days: action.payload}
 
         default:

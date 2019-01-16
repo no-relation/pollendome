@@ -5,7 +5,7 @@ import { Calendar } from 'react-calendar'
 export class DaysForm extends Component {
 
     state = {
-        calDate: new Date("2013-01-01"),
+        calDate: new Date("2014-03-03"),
     }
 
     handleOnChange = date => this.setState({ calDate: date })
