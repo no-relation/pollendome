@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import { DaysForm } from '../components/daysForm';
+import { connect } from 'react-redux';
+import { days_actions } from '../../state/actions/days_actions';
 
-export class DaysContainer extends Component {
-
-    componentDidMount() {
-
-    }
+class _DaysContainer extends Component {
 
     render() {
         return (
             <Container>
-                <DaysForm />
-
+                <Header>Days Gone By</Header>
+                <DaysForm getDays = {this.props.getDays}/>
             </Container>
         );
     }
 }
 
-// export default DaysContainer;
+export const DaysContainer = connect(null, days_actions)(_DaysContainer);

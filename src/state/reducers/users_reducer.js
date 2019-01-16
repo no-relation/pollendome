@@ -11,6 +11,10 @@ export const users_reducer = function(prevState = {}, action) {
             localStorage.removeItem("token")
             return {...prevState, currentUser: ''}
 
+        case "GET_DAYS":
+            console.log('in reducer', action)
+            return {...prevState, days: action.payload}
+
         default:
             return prevState
     }
