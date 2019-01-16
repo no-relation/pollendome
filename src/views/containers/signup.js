@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Header, Icon, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { UserForm } from '../components/userForm';
-import { actions } from '../../state/actions';
+import { user_actions } from '../../state/actions/user_actions';
 
 class _Signup extends Component {
     render() {
@@ -20,4 +20,4 @@ class _Signup extends Component {
 }
 
 
-export const Signup = connect(null, actions)(_Signup);
+export const Signup = connect(null, user_actions)(_Signup);

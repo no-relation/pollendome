@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Card, Icon } from 'semantic-ui-react';
+import { Container, Card } from 'semantic-ui-react';
 import { API } from '../../state/API';
+import { Link } from 'react-router-dom';
 
 export class UserList extends Component {
 
@@ -16,25 +17,15 @@ export class UserList extends Component {
             });
     }
 
-    deleteUser = (id) => {
-        fetch(`${API}/users/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        })
-    }
-
     render() {
         return (
             <Container>
-                {this.state.users.map( user => {
+                {this.state.users.map( (user, index) => {
                     return  (
-                        <Card>
+                        <Card key={index} >
                             <Card.Content>
-                                <Card.Header>{user.username}</Card.Header>
+                                <Card.Header as={Link} to={`/user/${user.id}`} >{user.username}</Card.Header>
                                 <Card.Description>{user.email}</Card.Description>
-                                <Icon name='delete' onClick={() => this.deleteUser(user.id)} />
                             </Card.Content>
                         </Card>
                     )
