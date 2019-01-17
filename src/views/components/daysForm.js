@@ -5,15 +5,14 @@ import { Calendar } from 'react-calendar'
 export class DaysForm extends Component {
 
     state = {
-        calDate: new Date("2014-03-03"),
+        dates: new Date("2014-03-03"),
     }
 
-    handleOnChange = date => this.setState({ calDate: date })
+    handleOnChange = date => this.setState({ dates: date })
 
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
-
     }
 
     render() {
@@ -23,7 +22,7 @@ export class DaysForm extends Component {
                     minDate={new Date("2013-01-01")}
                     selectRange={true}
                     onChange={this.handleOnChange}
-                    value={this.state.calDate}
+                    value={this.state.dates}
                     calendarType="US"
                 />
                 <Form.Button color='blue'>Submit</Form.Button>

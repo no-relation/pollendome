@@ -64,6 +64,9 @@ export class NavBar extends Component {
                 <Menu.Item>
                     Forecast
                 </Menu.Item>
+                <Menu.Item as={Link} to='/days' >
+                    Past Data
+                </Menu.Item>
                 <Menu.Item>
                     {this.formatMonthDayYear(this.state.date)}
                 </Menu.Item>
