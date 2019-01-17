@@ -14,7 +14,12 @@ class _Chart extends Component {
         return {
             label: spore,
             data: daySet.map((day) => {
-                return Number(day[`${spore}`])
+                const value = Number(day[`${spore}`])
+                if (isNaN(value)) {
+                    return 0
+                } else {
+                    return value
+                }
             }),
             borderColor: `hsla(${Math.floor(Math.random() * 360)}, 80%, 45%, 1)`
         }
@@ -27,7 +32,7 @@ class _Chart extends Component {
                 list.push(key)
             }
         })
-        return list.filter((item) => Number(day[item]) > 50)
+        return list.filter((item) => Number(day[item]) > 20)
     }
 
     data = () => {
@@ -39,27 +44,6 @@ class _Chart extends Component {
                 datasets: this.getSporeList(this.props.days[0]).map(spore => {
                     return this.getDataset(this.props.days, spore)
                 })
-                // [this.getDataset(this.props.days, 'cladosporium')]
-                
-                // [
-                //     {
-                //         label: "My First dataset",
-                //         data: [65, 59, 80, 81, 56, 55, 40],
-                //         backgroundColor: 'rgba(66, 63, 237,0.3)',
-                //         borderColor: "rgba(66, 63, 237,1)"
-                //     },
-                // ]
-                //     // {
-                    //     //     label: "My Second dataset",
-                    //     //     fillColor: "rgba(151,187,205,0.2)",
-                    //     //     strokeColor: "rgba(151,187,205,1)",
-                    //     //     pointColor: "rgba(151,187,205,1)",
-                    //     //     pointStrokeColor: "#fff",
-                    //     //     pointHighlightFill: "#fff",
-                    //     //     pointHighlightStroke: "rgba(151,187,205,1)",
-                    //     //     data: [28, 48, 40, 19, 86, 27, 90]
-                    //     // }
-                    // ]
             })
         } else {
             return ({

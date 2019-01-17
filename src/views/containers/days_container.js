@@ -10,8 +10,8 @@ class _DaysContainer extends Component {
     render() {
         return (
             <Container>
-                <Header>Days Gone By</Header>
                 <Chart days={this.props.days} />
+                <Header as='h3' >Select start and end dates</Header>
                 <DaysForm getDays = {this.props.getDays}/>
             </Container>
         );
