@@ -4,10 +4,6 @@ import { Line } from 'react-chartjs-2'
 
 class _Chart extends Component {
 
-    state = {
-        isLoading: true
-    }
-
     render = () => {
         return (
             <Line data={this.data()}/>
@@ -26,19 +22,16 @@ class _Chart extends Component {
 
     getSporeList = (day) => {
         let list = []
-        Object.keys(day).forEach( prop => {
-            if (day.prop !== 'na') {
-                if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(prop) <= -1) {
-                    list.push(prop)
-                }
+        Object.keys(day).forEach( key => {
+            if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
+                list.push(key)
             }
         })
-        return list
+        return list.filter((item) => Number(day[item]) > 50)
     }
 
-
     data = () => {
-        if (this.props.days) {
+        if (this.props.days && this.props.days.length > 0) {
             return ({
                 labels: this.props.days.map(day => {
                     return day.date
