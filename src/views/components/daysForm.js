@@ -13,7 +13,6 @@ export class DaysForm extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
-
     }
 
     render() {
