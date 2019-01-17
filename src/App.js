@@ -13,6 +13,14 @@ import { user_actions } from './state/actions/user_actions';
 import { DaysContainer } from './views/containers/days_container';
 
 class _App extends Component {
+
+  componentDidMount(){
+    const currentUser = localStorage.getItem("currentUser")
+    if (currentUser) {
+      this.props.returningUser(JSON.parse(currentUser))
+    }
+  }
+
   render() {
     return (
       <Router history={history}>

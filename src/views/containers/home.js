@@ -3,9 +3,9 @@ import { Chart } from '../components/chart';
 import { Container, Header } from "semantic-ui-react";
 import { connect } from 'react-redux';
 import { days_actions } from '../../state/actions/days_actions';
+import { Welcome } from "../components/welcome";
 
 class _Home extends Component {
-
 
     componentDidMount() { 
         const now = new Date()
@@ -18,6 +18,7 @@ class _Home extends Component {
     render() {
         return (
             <Container>
+                <Welcome currentUser={this.props.currentUser}/>
                 <Header>Looking Back</Header>
                 <Header.Subheader>Allergen counts from this time last year </Header.Subheader>
                 <Chart data={this.props.dates} />
@@ -27,7 +28,8 @@ class _Home extends Component {
 }
 
 const mapStateToProps = state => ({
-    days: state.days
+    days: state.days,
+    currentUser: state.currentUser
 })
 
 export const Home = connect(mapStateToProps, days_actions)(_Home);

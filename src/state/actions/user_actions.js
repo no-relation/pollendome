@@ -64,7 +64,7 @@ export const user_actions = {
         }
     },
 
-    // getDays(payload) {
-    //     return
-    // }
+    returningUser(payload) {
+        return({ type: "RETURNING_USER", payload: payload})
+    }
 }
