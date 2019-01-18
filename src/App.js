@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import history from "./state/history";
 import { NavBar } from "./views/components/navbar";
 import { Home } from "./views/containers/home";
-import { User } from "./views/components/user";
+import { User } from "./views/containers/user";
 import { UserList } from "./views/components/userlist"
 import { Login } from "./views/components/login";
 import { Signup } from "./views/containers/signup";

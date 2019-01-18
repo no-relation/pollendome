@@ -9,11 +9,11 @@ export class NavBar extends Component {
             activeItem: 'home'
     }
 
-    formatMonthDayYear = () => {
+    formatMonthDayYear = (date) => {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        const month = months[this.state.today.getMonth()]
-        const numDay = this.state.today.getDate()
-        const year = this.state.today.getFullYear()
+        const month = months[date.getMonth()]
+        const numDay = date.getDate()
+        const year = date.getFullYear()
 
         return month + ' ' + numDay + ', ' + year
     }
@@ -89,7 +89,7 @@ export class NavBar extends Component {
                 <Menu.Item 
                 name='today' active={activeItem === 'today'} 
                 onClick={this.handleItemClick}>
-                    {this.formatMonthDayYear(this.state.date)}
+                    {this.formatMonthDayYear(this.state.today)}
                 </Menu.Item>
                 {this.userLoggedIn()}
             </Menu>

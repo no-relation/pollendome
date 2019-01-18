@@ -70,7 +70,11 @@ export const user_actions = {
 
     getFeelings(userID) {
         return function (dispatch) {
-            fetch(`${API}/feelings/user/${userID}`)
+            fetch(`${API}/feelings/user/${userID}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then(resp => resp.json())
                 .then(feelings => dispatch({ type: "GET_FEELINGS", payload: feelings }))
         }
