@@ -16,7 +16,7 @@ export class Welcome extends Component {
         } else {
             return (
                 <Container>
-                    <Header>Welcome!<br /> Would you like to <Link to="/login">log in?</Link> </Header>
+                    <Header>Welcome!<br /> Would you like to <Link to="/login">log in,</Link> or <Link to='/signup'>create a new account?</Link> </Header>
                     <Header.Subheader>Logging in allows us to keep track of how you feel on a given day, which helps our predictions</Header.Subheader>
                 </Container>
             )

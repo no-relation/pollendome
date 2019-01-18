@@ -5,10 +5,13 @@ import { Calendar } from 'react-calendar'
 export class DaysForm extends Component {
 
     state = {
-        dates: new Date("2014-03-03"),
+        dates: [
+            new Date("2014-03-03"),
+            new Date("2104-03-20")
+        ]
     }
 
-    handleOnChange = date => this.setState({ dates: date })
+    handleOnChangeCalendar = date => this.setState({ dates: date })
 
     handleOnSubmit = (e) => {
         e.preventDefault()
@@ -18,10 +21,14 @@ export class DaysForm extends Component {
     render() {
         return (
             <Form onSubmit={this.handleOnSubmit} >
+                <Form.Group widths='equal'>
+                    <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString()} placeholder="start date" width={4} />
+                    <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString()} placeholder="start date"/>
+                </Form.Group>
                 <Calendar 
                     minDate={new Date("2013-01-01")}
                     selectRange={true}
-                    onChange={this.handleOnChange}
+                    onChange={this.handleOnChangeCalendar}
                     value={this.state.dates}
                     calendarType="US"
                 />
