@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
+import { Header, Container } from 'semantic-ui-react';
+import { days_actions } from '../../state/actions/days_actions';
 
 class _Chart extends Component {
 
+
+
     render = () => {
-        return (
-            <Line data={this.data()}/>
-        );
+        if (this.props.days && this.props.days.length !== 0) {
+            return (
+                <Container>
+                    <Line data={this.data()}/>
+                    <Header.Subheader disabled>Readings are not taken on all days</Header.Subheader>
+                </Container>
+                );
+        } else {
+            return <Header>There is no data available for the requested days</Header>
+        }
     }
 
     getDataset = (daySet, spore) => {
@@ -32,7 +43,9 @@ class _Chart extends Component {
                 list.push(key)
             }
         })
-        return list.filter((item) => Number(day[item]) > 20)
+        const limitedList = list.filter((item) => Number(day[item]) > 20)
+        const sortedList = limitedList.sort((a,b) => b-a)
+        return sortedList.slice(0, 5)
     }
 
     data = () => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import { DaysForm } from '../components/daysForm';
 import { connect } from 'react-redux';
 import { days_actions } from '../../state/actions/days_actions';
@@ -11,6 +11,7 @@ class _DaysContainer extends Component {
         return (
             <Container>
                 <Chart days={this.props.days} />
+                <Divider />
                 <DaysForm getDays = {this.props.getDays}/>
             </Container>
         );
