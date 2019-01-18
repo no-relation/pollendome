@@ -7,7 +7,8 @@ export class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date()
+            date: new Date(),
+            activeItem: 'home'
         };
     }
 
@@ -20,20 +21,28 @@ export class NavBar extends Component {
         return month + ' ' + numDay + ', ' + year
     }
 
-    handleClick = (e) => {
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+    handleLogout = (e) => {
         this.props.logout()
     }
 
     userLoggedIn = () => {
+        const { activeItem } = this.state
+
         if (Object.keys(this.props.currentUser).length !== 0) {
             return (
                 <Menu.Menu position='right'>
-                    <Menu.Item as={Link} to ={`/user/${this.props.currentUser.id}`} >
+                    <Menu.Item as={Link} to={`/user/${this.props.currentUser.id}`} 
+                    name='profile' 
+                    active={activeItem === 'profile'} 
+                    onClick={this.handleItemClick} >
                         Profile
                     </Menu.Item>
                     <Menu.Item as={Link} to='/'
                         name="logout"
-                        onClick={this.handleClick} >
+                        onClick={this.handleLogout} 
+                        active={activeItem === 'logout'} >
                         Logout
                     </Menu.Item>
                 </Menu.Menu >
@@ -41,33 +50,48 @@ export class NavBar extends Component {
         } else {
             return (
                 <Menu.Menu position='right'>
-                    <Menu.Item as={Link} to='/signup' >
+                    <Menu.Item as={Link} to='/signup' 
+                    name='signup' 
+                    active={activeItem === 'signup'} 
+                    onClick={this.handleItemClick}>
                         Sign Up
                     </Menu.Item>
-                    <Menu.Item as={Link} to='/login' >
+                    <Menu.Item as={Link} to='/login' 
+                    name='login' 
+                    active={activeItem === 'login'} 
+                    onClick={this.handleItemClick}>
                         Login
                     </Menu.Item>
                 </Menu.Menu >
             )
-}
+        }
     }
 
     render() {
+        const { activeItem } = this.state
+
         return (
             <Menu inverted>
-                <Menu.Item as={Link} to='/'>
+                <Menu.Item as={Link} to='/' 
+                name='home' active={activeItem === 'home'} 
+                onClick={this.handleItemClick}>
                     <strong>
                         WELCOME TO<br />
                         POLLENDOME
                     </strong>
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item name='forecast' active={activeItem === 'forecast'} 
+                onClick={this.handleItemClick}>
                     Forecast
                 </Menu.Item>
-                <Menu.Item as={Link} to='/days' >
+                <Menu.Item as={Link} to='/days' 
+                name='days' active={activeItem === 'days'} 
+                onClick={this.handleItemClick}>
                     Past Data
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item 
+                name='today' active={activeItem === 'today'} 
+                onClick={this.handleItemClick}>
                     {this.formatMonthDayYear(this.state.date)}
                 </Menu.Item>
                 {this.userLoggedIn()}
