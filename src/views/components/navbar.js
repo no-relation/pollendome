@@ -30,24 +30,7 @@ export class NavBar extends Component {
     userLoggedIn = () => {
         const { activeItem } = this.state
 
-        if (Object.keys(this.props.currentUser).length !== 0) {
-            return (
-                <Menu.Menu position='right'>
-                    <Menu.Item as={Link} to={`/user/${this.props.currentUser.id}`} 
-                    name='profile' 
-                    active={activeItem === 'profile'} 
-                    onClick={this.handleItemClick} >
-                        Profile
-                    </Menu.Item>
-                    <Menu.Item as={Link} to='/'
-                        name="logout"
-                        onClick={this.handleLogout} 
-                        active={activeItem === 'logout'} >
-                        Logout
-                    </Menu.Item>
-                </Menu.Menu >
-            )
-        } else {
+        if (Object.keys(this.props.currentUser).length === 0 || this.props.currentUser["error"]) {
             return (
                 <Menu.Menu position='right'>
                     <Menu.Item as={Link} to='/signup' 
@@ -61,6 +44,23 @@ export class NavBar extends Component {
                     active={activeItem === 'login'} 
                     onClick={this.handleItemClick}>
                         Login
+                    </Menu.Item>
+                    </Menu.Menu >
+            )
+        } else {
+            return (
+                <Menu.Menu position='right'>
+                    <Menu.Item as={Link} to={`/user/${this.props.currentUser.id}`}
+                        name='profile'
+                        active={activeItem === 'profile'}
+                        onClick={this.handleItemClick} >
+                        Profile
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/'
+                        name="logout"
+                        onClick={this.handleLogout}
+                        active={activeItem === 'logout'} >
+                        Logout
                     </Menu.Item>
                 </Menu.Menu >
             )
