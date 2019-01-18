@@ -5,24 +5,33 @@ import { FeelingsForm } from './feelingsForm';
 
 export class Welcome extends Component {
     
+    state = {
+        date: new Date()
+    }
+
     userLoggedIn = () => {
-        if (Object.keys(this.props.currentUser).length !== 0) {
+        if (Object.keys(this.props.currentUser).length === 0 || this.props.currentUser["error"]) {
             return (
                 <Container>
-                    <Header>Welcome back, {this.props.currentUser.username}! </Header>
-                    <FeelingsForm />
+                    <Header>Welcome!<br /> Would you like to <Link to="/login">log in,</Link> or <Link to='/signup'>create a new account?</Link> </Header>
+                    <Header.Subheader>Logging in allows us to keep track of how you feel on a given day, which helps our predictions</Header.Subheader>
                 </Container>
             )
         } else {
             return (
                 <Container>
-                    <Header>Welcome!<br /> Would you like to <Link to="/login">log in?</Link> </Header>
-                    <Header.Subheader>Logging in allows us to keep track of how you feel on a given day, which helps our predictions</Header.Subheader>
+                    <Header>Welcome back, {this.props.currentUser.username}! </Header>
+                    {this.props.feelings && <FeelingsForm date={this.state.date} />}
                 </Container>
             )
         }
     }
 
+    todaysFeelings = () => {
+        console.log('feelings', this.props.feelings)
+        // if (this.props.feelings && )
+    }
+    
     render() {
         return (
             <Container>

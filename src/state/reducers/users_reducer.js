@@ -18,6 +18,9 @@ export const users_reducer = function(prevState = {}, action) {
 
         case "GET_DAYS":    
             return {...prevState, days: action.payload}
+
+        case "GET_FEELINGS":    
+            return {...prevState, feelings: action.payload}
     
         default:
             return prevState
