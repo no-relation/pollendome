@@ -66,5 +66,13 @@ export const user_actions = {
 
     returningUser(payload) {
         return({ type: "RETURNING_USER", payload: payload})
+    },
+
+    getFeelings(userID) {
+        return function (dispatch) {
+            fetch(`${API}/feelings/user/${userID}`)
+                .then(resp => resp.json())
+                .then(feelings => dispatch({ type: "GET_FEELINGS", payload: feelings }))
+        }
     }
 }

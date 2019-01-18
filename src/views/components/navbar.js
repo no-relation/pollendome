@@ -4,19 +4,16 @@ import { Link } from 'react-router-dom'
 
 export class NavBar extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date(),
+    state = {
+            today: new Date(),
             activeItem: 'home'
-        };
     }
 
-    formatMonthDayYear = (date) => {
+    formatMonthDayYear = () => {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        const month = months[this.state.date.getMonth()]
-        const numDay = this.state.date.getDate()
-        const year = this.state.date.getFullYear()
+        const month = months[this.state.today.getMonth()]
+        const numDay = this.state.today.getDate()
+        const year = this.state.today.getFullYear()
 
         return month + ' ' + numDay + ', ' + year
     }

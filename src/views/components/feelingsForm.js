@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import { Header, Form, Container, Icon, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { feelings_actions } from '../../state/actions/feelings_actions';
 
-export class FeelingsForm extends Component {
+class _FeelingsForm extends Component {
+
+    state = {
+        today: this.props.date
+    }
 
     onGoodClick = (e) => {
-
+        this.props.createFeeling({
+            rating: 5,
+            user_id: this.props.currentUser.id,
+            fulldate: this.state.today
+        })
     }
 
     onBadClick = (e) => {
-
+        this.props.createFeeling({
+            rating: 0,
+            user_id: this.props.currentUser.id,
+            fulldate: this.state.today
+        })
     }
 
     render() {
@@ -33,4 +47,8 @@ export class FeelingsForm extends Component {
     }
 }
 
-// export default FeelingsForm;
+const mapStateToProps = state => ({
+    currentUser: state.currentUser
+})
+
+export const FeelingsForm = connect(mapStateToProps, feelings_actions)(_FeelingsForm);

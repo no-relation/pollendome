@@ -10,9 +10,15 @@ class _User extends Component {
         showEdit: false
     }
 
+    componentDidMount() {
+        this.props.getFeelings(this.props.currentUser.id)
+    }
+
     dataOrEdit = () => {
         if (this.state.showEdit) {
-            return <UserForm currentUser={this.props.currentUser} closeForm={() => this.setState({ showEdit: false })} editUser={this.props.editUser} />
+            return <UserForm currentUser={this.props.currentUser} 
+                closeForm={() => this.setState({ showEdit: false })} 
+                editUser={this.props.editUser} />
             
         } else {
             return(
@@ -29,6 +35,7 @@ class _User extends Component {
                     <br/>
                     <Button content='Edit' primary onClick={() => this.setState({ showEdit: true })} />
                     <Button content="Delete" color='red' onClick={() => this.props.deleteUser(this.props.currentUser.id)} />
+
                 </Container>
             )
         }

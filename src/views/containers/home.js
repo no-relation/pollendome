@@ -24,7 +24,7 @@ class _Home extends Component {
         const lastYearDays = onlyADayArray.join(' to ')
         return (
             <Container>
-                <Welcome currentUser={this.props.currentUser}/>
+                <Welcome currentUser={this.props.currentUser} feelings={this.props.feelings} />
                 <Header>Looking Back</Header>
                 <Header.Subheader>Allergen counts from {lastYearDays ? lastYearDays : "this time last year"}</Header.Subheader>
                 <Chart data={this.props.dates} />
@@ -35,7 +35,8 @@ class _Home extends Component {
 
 const mapStateToProps = state => ({
     days: state.days,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    feelings: state.feelings
 })
 
 export const Home = connect(mapStateToProps, days_actions)(_Home);
