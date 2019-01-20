@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
 import { Header, Container } from 'semantic-ui-react';
+import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
-
-
 
     render = () => {
         if (this.props.days && this.props.days.length !== 0) {
@@ -20,7 +19,13 @@ class _Chart extends Component {
         }
     }
 
-    getDataset = (daySet, spore, colorhue) => {
+    getDataset = (daySet, spore) => {
+        let colorhue;
+        if (pollenOrMold(spore) === 'mold'){
+            colorhue = Math.floor(Math.random() * 125 + 175)
+        } else if (pollenOrMold(spore) === 'pollen') {
+            colorhue = Math.floor(Math.random() * 125)
+        }
         return {
             label: spore,
             data: daySet.map((day) => {
@@ -44,18 +49,17 @@ class _Chart extends Component {
         })
         const limitedList = list.filter((item) => Number(day[item]) > 20)
         const sortedList = limitedList.sort((a,b) => b-a)
-        return sortedList.slice(0, 5)
+        return sortedList.slice(0, 7)
     }
 
     data = () => {
         if (this.props.days && this.props.days.length > 0) {
-            let colorhue = Math.floor(Math.random() * 360)
             return ({
                 labels: this.props.days.map(day => {
                     return `${day.month}-${day.date}`
                 }),
                 datasets: this.getSporeList(this.props.days[0]).map(spore => {
-                    return this.getDataset(this.props.days, spore, colorhue += 30)
+                    return this.getDataset(this.props.days, spore)
                 })
             })
         } else {
