@@ -20,7 +20,7 @@ class _Chart extends Component {
         }
     }
 
-    getDataset = (daySet, spore) => {
+    getDataset = (daySet, spore, colorhue) => {
         return {
             label: spore,
             data: daySet.map((day) => {
@@ -31,7 +31,7 @@ class _Chart extends Component {
                     return value
                 }
             }),
-            borderColor: `hsla(${Math.floor(Math.random() * 360)}, 80%, 45%, 1)`
+            borderColor: `hsla(${colorhue}, 80%, 45%, 1)`
         }
     }
 
@@ -49,12 +49,13 @@ class _Chart extends Component {
 
     data = () => {
         if (this.props.days && this.props.days.length > 0) {
+            let colorhue = Math.floor(Math.random() * 360)
             return ({
                 labels: this.props.days.map(day => {
-                    return day.date
+                    return `${day.month}-${day.date}`
                 }),
                 datasets: this.getSporeList(this.props.days[0]).map(spore => {
-                    return this.getDataset(this.props.days, spore)
+                    return this.getDataset(this.props.days, spore, colorhue += 30)
                 })
             })
         } else {
