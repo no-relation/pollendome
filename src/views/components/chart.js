@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
 import { Header, Container } from 'semantic-ui-react';
-import { days_actions } from '../../state/actions/days_actions';
 
 class _Chart extends Component {
 

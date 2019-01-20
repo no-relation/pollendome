@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Header, Container, Icon, Button, Divider } from 'semantic-ui-react'
+import { Header, Container, Icon, Button } from 'semantic-ui-react'
 import { UserForm } from "../components/userForm";
 import { user_actions } from '../../state/actions/user_actions';
-import { FeelingsForm } from "../components/feelingsForm";
 import { FeelingsContainer } from "./feelingsContainer";
 
 class _User extends Component {
