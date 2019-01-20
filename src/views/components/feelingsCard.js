@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Icon, List, Container } from 'semantic-ui-react';
+import { pollenOrMold } from './pollenormold';
 
 export class FeelingsCard extends Component {
 
@@ -13,21 +14,44 @@ export class FeelingsCard extends Component {
         return month + ' ' + numDay + ', ' + year
     }
 
-    getSporeList = (day) => {
+    getHighest = (day, sporeType) => {
         let list = []
         Object.keys(day).forEach(key => {
-            if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
+            if (sporeType === pollenOrMold(key)) {
                 list.push(key)
             }
         })
         const limitedList = list.filter((item) => Number(day[item]) > 20)
-        const topFive = limitedList.sort((a, b) => b - a).slice(0, 5)
+        const sortedList = limitedList.sort((a, b) => b - a)
+
+        return sortedList.slice(0, 4)
+
+    }
+    getSporeList = (day) => {
+        const spores = this.getHighest(day, "pollen").concat(this.getHighest(day, "mold"))
+
         return (
-            topFive.map((spore, index) => {
+            spores.map((spore, index) => {
                 return <List.Item key={index} >{`${spore} (${day[spore]})`}</List.Item>
             })
         )
     }
+
+    // getSporeList = (day) => {
+    //     let list = []
+    //     Object.keys(day).forEach(key => {
+    //         if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
+    //             list.push(key)
+    //         }
+    //     })
+    //     const limitedList = list.filter((item) => Number(day[item]) > 20)
+    //     const topFive = limitedList.sort((a, b) => b - a).slice(0, 5)
+    //     return (
+    //         topFive.map((spore, index) => {
+    //             return <List.Item key={index} >{`${spore} (${day[spore]})`}</List.Item>
+    //         })
+    //     )
+    // }
 
     renderBadSporeList = () => {
         const spores = this.getSporeList(this.props.feeling.day)

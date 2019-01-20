@@ -22,8 +22,8 @@ export class DaysForm extends Component {
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
-                <Grid>
-                    <Grid.Column width={8}>
+                <Grid relaxed columns={2}>
+                    <Grid.Column>
                         <Calendar 
                             minDate={new Date("2013-01-01")}
                             selectRange={true}
@@ -32,11 +32,12 @@ export class DaysForm extends Component {
                             calendarType="US"
                         />
                     </Grid.Column>
-
-                    <Form.Group widths='equal'>
-                        <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString()} placeholder="start date" width={4} />
-                        <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString()} placeholder="start date"/>
-                    </Form.Group>
+                    <Grid.Column>
+                        <Form.Group widths='equal'>
+                            <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString()} placeholder="start date" />
+                            <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString()} placeholder="start date"/>
+                        </Form.Group>
+                    </Grid.Column>
                 </Grid>
             </Form>
         );

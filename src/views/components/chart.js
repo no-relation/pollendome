@@ -10,7 +10,7 @@ class _Chart extends Component {
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
-                    <Line data={this.data()}/>
+                    <Line data={this.data(this.props.days)}/>
                     <Header.Subheader disabled>Readings are not taken on all days</Header.Subheader>
                 </Container>
                 );
@@ -22,10 +22,16 @@ class _Chart extends Component {
     getDataset = (daySet, spore) => {
         let colorhue;
         if (pollenOrMold(spore) === 'mold'){
+            // teal, blue, purple
             colorhue = Math.floor(Math.random() * 125 + 175)
         } else if (pollenOrMold(spore) === 'pollen') {
+            // red to green
             colorhue = Math.floor(Math.random() * 125)
+        } else {
+            // red
+            colorhue = 360
         }
+
         return {
             label: spore,
             data: daySet.map((day) => {
@@ -40,26 +46,34 @@ class _Chart extends Component {
         }
     }
 
-    getSporeList = (day) => {
+    getHighest = (day, sporeType) => {
         let list = []
         Object.keys(day).forEach( key => {
-            if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
+            if (sporeType === pollenOrMold(key)) {
                 list.push(key)
             }
         })
         const limitedList = list.filter((item) => Number(day[item]) > 20)
         const sortedList = limitedList.sort((a,b) => b-a)
-        return sortedList.slice(0, 7)
+
+        return sortedList.slice(0, 4)
+
+    }
+    getSporeList = (day) => {
+        const pollens = this.getHighest(day, "pollen")
+        const molds = this.getHighest(day, "mold")
+
+        return pollens.concat(molds)
     }
 
-    data = () => {
-        if (this.props.days && this.props.days.length > 0) {
+    data = (days) => {
+        if (days && days.length > 0) {
             return ({
-                labels: this.props.days.map(day => {
+                labels: days.map(day => {
                     return `${day.month}-${day.date}`
                 }),
-                datasets: this.getSporeList(this.props.days[0]).map(spore => {
-                    return this.getDataset(this.props.days, spore)
+                datasets: this.getSporeList(days[0]).map(spore => {
+                    return this.getDataset(days, spore)
                 })
             })
         } else {
