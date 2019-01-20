@@ -23,8 +23,8 @@ export class FeelingsCard extends Component {
         const limitedList = list.filter((item) => Number(day[item]) > 20)
         const topFive = limitedList.sort((a, b) => b - a).slice(0, 5)
         return (
-            topFive.map(spore => {
-                return <List.Item>{`${spore} (${day[spore]})`}</List.Item>
+            topFive.map((spore, index) => {
+                return <List.Item key={index} >{`${spore} (${day[spore]})`}</List.Item>
             })
         )
     }
