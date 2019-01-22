@@ -11,7 +11,7 @@ class _Chart extends Component {
             return (
                 <Container>
                     <Line data={this.data(this.props.days)}/>
-                    <Header.Subheader disabled>Readings are not taken on all days</Header.Subheader>
+                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
         } else {
@@ -53,7 +53,7 @@ class _Chart extends Component {
                 list.push(key)
             }
         })
-        const limitedList = list.filter((item) => Number(day[item]) > 20)
+        const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a,b) => b-a)
 
         return sortedList.slice(0, 4)
@@ -70,7 +70,7 @@ class _Chart extends Component {
         if (days && days.length > 0) {
             return ({
                 labels: days.map(day => {
-                    return `${day.month}-${day.date}`
+                    return day.fulldate.slice(5)
                 }),
                 datasets: this.getSporeList(days[0]).map(spore => {
                     return this.getDataset(days, spore)
@@ -86,8 +86,8 @@ class _Chart extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return { days: state.days }
-}
+const mapStateToProps = (state) => ({
+    days: state.days
+})
 
 export const Chart = connect(mapStateToProps)(_Chart);

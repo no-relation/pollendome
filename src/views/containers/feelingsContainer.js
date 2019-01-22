@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import { FeelingsCard } from '../components/feelingsCard';
 import { FeelingsForm } from '../components/feelingsForm';
 

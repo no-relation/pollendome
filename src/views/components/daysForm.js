@@ -11,13 +11,20 @@ export class DaysForm extends Component {
         ]
     }
 
-    handleOnChangeCalendar = date => this.setState({ dates: date })
-
-    handleOnSubmit = (e) => {
-        e.preventDefault()
-        this.props.getDays(this.state)
-    }
-
+    // why does this cause line 44 to error out?
+    // componentDidMount() {
+    //     if (this.props.days) {
+    //         this.setState({ dates: [this.props.days[0], this.props.days[-1]] })
+    //     }
+    // }
+        
+        handleOnChangeCalendar = date => this.setState({ dates: date })
+        
+        handleOnSubmit = (e) => {
+            e.preventDefault()
+            this.props.getDays(this.state)
+        }
+        
     render() {
         return (
             <Form onSubmit={this.handleOnSubmit} >

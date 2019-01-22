@@ -77,11 +77,11 @@ export class NavBar extends Component {
                         POLLENDOME
                     </strong>
                 </Menu.Item>
-                <Menu.Item name='forecast' active={activeItem === 'forecast'} 
+                <Menu.Item as={Link} to='/future' name='forecast' active={activeItem === 'forecast'} 
                 onClick={this.handleItemClick}>
                     Forecast
                 </Menu.Item>
-                <Menu.Item as={Link} to='/days' 
+                <Menu.Item as={Link} to='/past' 
                 name='days' active={activeItem === 'days'} 
                 onClick={this.handleItemClick}>
                     Past Data
