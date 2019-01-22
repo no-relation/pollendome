@@ -42,7 +42,7 @@ class _User extends Component {
                         </Button.Group>
                     </Card>
                     <br />
-                    <FeelingsContainer feelings={this.props.feelings} date={this.state.date} />
+                    <FeelingsContainer currentUser={this.props.currentUser} feelings={this.props.feelings} date={this.state.date} />
                 </Container>
             )
         }

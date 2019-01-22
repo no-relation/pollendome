@@ -16,5 +16,19 @@ export const feelings_actions = {
                 .then(resp => resp.json())
                 .then(feelings => dispatch({ type: "GET_FEELINGS", payload: feelings }))
         }
+    },
+
+    getFeelings(userID) {
+        return function (dispatch) {
+            fetch(`${API}/feelings/?userid=${userID}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then(resp => resp.json())
+                .then(feelings => dispatch({ type: "GET_FEELINGS", payload: feelings }))
+        }
     }
 }

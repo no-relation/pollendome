@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Divider, Header } from 'semantic-ui-react';
-import { DaysForm } from '../components/daysForm';
+import { DaysFormPast } from '../components/daysForm';
+import { DaysFormFuture } from '../components/daysForm';
 import { connect } from 'react-redux';
 import { days_actions } from '../../state/actions/days_actions';
 import { Chart } from '../components/chart';
@@ -10,34 +11,34 @@ class _DaysContainer extends Component {
 
     pastOrFuture = (url) => {
         if (url === '/future') {
-            const today = new Date()
-            today.setFullYear(3000)
-            const startdate = new Date(today)
-            startdate.setDate(startdate.getDate()-3)
-            const enddate = new Date(today)
-            enddate.setDate(enddate.getDate()+3)
-
-            // this.props.getDays({ 
-            //     dates: [startdate, enddate]
-            // })
             return (
-                <Header>Get forecasts for coming days</Header>
+                <Container>
+                    <Header>Get forecasts for coming days</Header>
+                    <Chart days={this.props.days} />
+                    <Header.Subheader disabled>Average reading for a given day over past years</Header.Subheader>
+                    <Divider />
+                    <DaysFormFuture getDays={this.props.getDays} />
+                </Container>
+
             );
         } else if (url === '/past') {
-            return <Header>See data for past dates</Header>
+
+            return (
+                <Container>
+                    <Header>See data for past dates</Header>
+                    <Chart days={this.props.days} />
+                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
+                    <Divider />
+                    <DaysFormPast getDays={this.props.getDays} />
+                </Container>
+
+            ) 
         }
 
     }
 
     render() {
-        return (
-            <Container>
-                {this.pastOrFuture(this.props.location.pathname)}
-                <Chart days={this.props.days} />
-                <Divider />
-                <DaysForm days={this.props.days} getDays={this.props.getDays} />
-            </Container>
-        )
+        return this.pastOrFuture(this.props.location.pathname)
     }
 }
 

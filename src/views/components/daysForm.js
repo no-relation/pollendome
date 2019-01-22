@@ -2,37 +2,38 @@ import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react';
 import { Calendar } from 'react-calendar'
 
-export class DaysForm extends Component {
+export class DaysFormPast extends Component {
 
     state = {
         dates: [
-            new Date("2014-03-03"),
-            new Date("2014-03-20")
-        ]
+            new Date('2015-02-01'),
+            new Date('2015-04-31')
+        ],
+        formParams: {
+            mindate: new Date("2013-01-01"),
+            maxdate: new Date("2999-12-31"),
+            mindetail: 'decade',
+        }
     }
 
-    // why does this cause line 44 to error out?
-    // componentDidMount() {
-    //     if (this.props.days) {
-    //         this.setState({ dates: [this.props.days[0], this.props.days[-1]] })
-    //     }
-    // }
+    handleOnChangeCalendar = date => this.setState({ dates: date })
         
-        handleOnChangeCalendar = date => this.setState({ dates: date })
-        
-        handleOnSubmit = (e) => {
-            e.preventDefault()
-            this.props.getDays(this.state)
-        }
+    handleOnSubmit = (e) => {
+        e.preventDefault()
+        this.props.getDays(this.state)
+    }
         
     render() {
+
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
                     <Grid.Column>
                         <Calendar 
-                            minDate={new Date("2013-01-01")}
+                            minDate={this.state.formParams.mindate}
+                            maxDate={this.state.formParams.maxdate}
+                            minDetail={this.state.formParams.mindetail}
                             selectRange={true}
                             onChange={this.handleOnChangeCalendar}
                             value={this.state.dates}
@@ -41,8 +42,60 @@ export class DaysForm extends Component {
                     </Grid.Column>
                     <Grid.Column>
                         <Form.Group widths='equal'>
-                            <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString()} placeholder="start date" />
-                            <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString()} placeholder="start date"/>
+                            <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString().slice(4, 15)} />
+                            <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString().slice(4, 15)} />
+                        </Form.Group>
+                    </Grid.Column>
+                </Grid>
+            </Form>
+        );
+    }
+}
+
+export class DaysFormFuture extends Component {
+
+    state = {
+        dates: [
+            new Date('3000-01-03'),
+            new Date('3000-01-31')
+        ],
+        formParams: {
+            mindate: new Date("3000-01-01"),
+            maxdate: new Date("3000-12-31"),
+            mindetail: 'year',
+        }
+    }
+
+    handleOnChangeCalendar = date => this.setState({ dates: date })
+        
+    handleOnSubmit = (e) => {
+        e.preventDefault()
+        this.props.getDays(this.state)
+    }
+        
+    render() {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+        return (
+            <Form onSubmit={this.handleOnSubmit} >
+                <Form.Button color='blue'>Submit</Form.Button>
+                <Grid relaxed columns={2}>
+                    <Grid.Column>
+                        <Calendar 
+                            navigationLabel={({ date, view, label }) => `${months[date.getMonth()]}`}
+                            minDate={this.state.formParams.mindate}
+                            maxDate={this.state.formParams.maxdate}
+                            minDetail={this.state.formParams.mindetail}
+                            selectRange={true}
+                            onChange={this.handleOnChangeCalendar}
+                            value={this.state.dates}
+                            calendarType="US"
+                        />
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Form.Group widths='equal'>
+                            <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString().slice(4, 10)} />
+                            <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString().slice(4, 10)} />
                         </Form.Group>
                     </Grid.Column>
                 </Grid>
