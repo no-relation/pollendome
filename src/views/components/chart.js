@@ -11,7 +11,6 @@ class _Chart extends Component {
             return (
                 <Container>
                     <Line data={this.data(this.props.days)}/>
-                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
         } else {
