@@ -16,6 +16,9 @@ export const users_reducer = function(prevState = {}, action) {
         case "RETURNING_USER":
             return { ...prevState, currentUser: action.payload}
 
+        case "ERROR_MESSAGE":
+            return { ...prevState, error: action.payload}
+
         case "GET_DAYS":    
             return {...prevState, days: action.payload}
 

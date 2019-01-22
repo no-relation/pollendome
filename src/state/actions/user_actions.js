@@ -1,4 +1,5 @@
 import { API } from '../API';
+import history from '../history';
 
 export const user_actions = {
 
@@ -13,7 +14,14 @@ export const user_actions = {
                 body: JSON.stringify( loggingUser )
         })
             .then(resp => resp.json())
-            .then(user => dispatch({ type: "LOGIN_USER", payload: user}))
+            .then(user => {
+                if (user.error) {
+                    dispatch({ type: "ERROR_MESSAGE", payload: user.error })
+                } else {
+                    dispatch({ type: "LOGIN_USER", payload: user })
+                    history.push(`/user/${user.id}`)
+                }
+            })
         }
     },
 

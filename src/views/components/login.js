@@ -20,15 +20,10 @@ class _Login extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.login(this.state)
-        if (this.props.currentUser.error) {
-            console.log('error:', this.props.currentUser)
-        } else {
-            history.push('/')
-        }
     }
 
     errorBox() {
-        let errorMessage = this.props.currentUser.error
+        let errorMessage = this.props.error
         console.log('errorbox, ACTIVATE!', errorMessage)
         if (errorMessage){
             return <Message negative 
@@ -68,7 +63,8 @@ class _Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    error: state.error
 })
 
 export const Login = connect(mapStateToProps, user_actions)(_Login)
