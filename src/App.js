@@ -27,7 +27,8 @@ class _App extends Component {
         <div>
           <NavBar currentUser = {this.props.currentUser} logout = {this.props.logout} />
           <Switch>
-            <Route path="/days" component={DaysContainer} />
+            <Route path="/past" component={DaysContainer} />
+            <Route path="/future" component={DaysContainer} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/user/:id" render = {(props) => <User {...props} /> } />

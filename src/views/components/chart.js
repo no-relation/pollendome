@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
 import { Header, Container } from 'semantic-ui-react';
+import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
-
-
 
     render = () => {
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
-                    <Line data={this.data()}/>
-                    <Header.Subheader disabled>Readings are not taken on all days</Header.Subheader>
+                    <Line data={this.data(this.props.days)}/>
+                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
         } else {
@@ -21,6 +20,18 @@ class _Chart extends Component {
     }
 
     getDataset = (daySet, spore) => {
+        let colorhue;
+        if (pollenOrMold(spore) === 'mold'){
+            // teal, blue, purple
+            colorhue = Math.floor(Math.random() * 125 + 175)
+        } else if (pollenOrMold(spore) === 'pollen') {
+            // red to green
+            colorhue = Math.floor(Math.random() * 125)
+        } else {
+            // red
+            colorhue = 360
+        }
+
         return {
             label: spore,
             data: daySet.map((day) => {
@@ -31,30 +42,38 @@ class _Chart extends Component {
                     return value
                 }
             }),
-            borderColor: `hsla(${Math.floor(Math.random() * 360)}, 80%, 45%, 1)`
+            borderColor: `hsla(${colorhue}, 80%, 45%, 1)`
         }
     }
 
-    getSporeList = (day) => {
+    getHighest = (day, sporeType) => {
         let list = []
         Object.keys(day).forEach( key => {
-            if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
+            if (sporeType === pollenOrMold(key)) {
                 list.push(key)
             }
         })
-        const limitedList = list.filter((item) => Number(day[item]) > 20)
+        const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a,b) => b-a)
-        return sortedList.slice(0, 5)
+
+        return sortedList.slice(0, 4)
+
+    }
+    getSporeList = (day) => {
+        const pollens = this.getHighest(day, "pollen")
+        const molds = this.getHighest(day, "mold")
+
+        return pollens.concat(molds)
     }
 
-    data = () => {
-        if (this.props.days && this.props.days.length > 0) {
+    data = (days) => {
+        if (days && days.length > 0) {
             return ({
-                labels: this.props.days.map(day => {
-                    return day.date
+                labels: days.map(day => {
+                    return day.fulldate.slice(5)
                 }),
-                datasets: this.getSporeList(this.props.days[0]).map(spore => {
-                    return this.getDataset(this.props.days, spore)
+                datasets: this.getSporeList(days[0]).map(spore => {
+                    return this.getDataset(days, spore)
                 })
             })
         } else {
@@ -67,8 +86,8 @@ class _Chart extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return { days: state.days }
-}
+const mapStateToProps = (state) => ({
+    days: state.days
+})
 
 export const Chart = connect(mapStateToProps)(_Chart);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Container, Icon, Header } from 'semantic-ui-react'
+import { Form, Container, Icon, Header, Message } from 'semantic-ui-react'
 import { user_actions } from '../../state/actions/user_actions';
 import { connect } from 'react-redux';
 import history from "../../state/history";
@@ -20,12 +20,27 @@ class _Login extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.login(this.state)
-        history.push('/')
+        if (this.props.currentUser.error) {
+            console.log('error:', this.props.currentUser)
+        } else {
+            history.push('/')
+        }
+    }
+
+    errorBox() {
+        let errorMessage = this.props.currentUser.error
+        console.log('errorbox, ACTIVATE!', errorMessage)
+        if (errorMessage){
+            return <Message negative 
+                header="Unable to login"
+                content={errorMessage} />
+        }
     }
 
     render(){
         return (
             <Container>
+                {this.errorBox()}
                 <Header as='h2' icon>
                     <Icon name='sign-in' />
                     Log In
@@ -52,4 +67,8 @@ class _Login extends Component {
     }
 }
 
-export const Login = connect(null, user_actions)(_Login)
+const mapStateToProps = (state) => ({
+    currentUser: state.currentUser
+})
+
+export const Login = connect(mapStateToProps, user_actions)(_Login)

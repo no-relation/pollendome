@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Header, Container, Icon, Button } from 'semantic-ui-react'
+import { Header, Container, Icon, Button, Card } from 'semantic-ui-react'
 import { UserForm } from "../components/userForm";
 import { user_actions } from '../../state/actions/user_actions';
 import { FeelingsContainer } from "./feelingsContainer";
@@ -27,19 +27,22 @@ class _User extends Component {
         } else {
             return(
                 <Container>
-                    <Header as='h2' icon>
-                        <Icon name='user circle' />
-                        {this.props.currentUser.username}
-                    </Header>
+                    <Card >
+                        <Header as='h2' icon>
+                            <Icon name='user circle' />
+                            {this.props.currentUser.username}
+                        </Header>
+                        <Header as='h4' icon>
+                            <Icon name='mail' />
+                            {this.props.currentUser.email}
+                        </Header>
+                        <Button.Group>
+                            <Button icon primary onClick={() => this.setState({ showEdit: true })}><Icon name="edit"/>Edit</Button>
+                            <Button icon color='red' onClick={() => this.props.deleteUser(this.props.currentUser.id)}><Icon name="trash alternate"/>Delete</Button>
+                        </Button.Group>
+                    </Card>
                     <br />
                     <FeelingsContainer feelings={this.props.feelings} date={this.state.date} />
-                    <Header as='h4' icon>
-                        <Icon name='mail' />
-                        {this.props.currentUser.email}
-                    </Header>
-                    <br/>
-                    <Button content='Edit' primary onClick={() => this.setState({ showEdit: true })} />
-                    <Button content="Delete" color='red' onClick={() => this.props.deleteUser(this.props.currentUser.id)} />
                 </Container>
             )
         }
