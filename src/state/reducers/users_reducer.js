@@ -6,7 +6,7 @@ export const users_reducer = function(prevState = {}, action) {
         case "LOGIN_USER":
             localStorage.setItem("token", action.payload.token)
             localStorage.setItem("currentUser", JSON.stringify(action.payload))
-            return {...prevState, currentUser: action.payload}
+            return {...prevState, currentUser: action.payload, error: null}
 
         case "LOGOUT_USER":
             localStorage.removeItem("token")

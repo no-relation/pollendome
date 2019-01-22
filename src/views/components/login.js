@@ -24,7 +24,6 @@ class _Login extends Component {
 
     errorBox() {
         let errorMessage = this.props.error
-        console.log('errorbox, ACTIVATE!', errorMessage)
         if (errorMessage){
             return <Message negative 
                 header="Unable to login"
