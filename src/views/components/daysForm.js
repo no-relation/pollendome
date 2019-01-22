@@ -24,6 +24,7 @@ export class DaysFormPast extends Component {
     }
         
     render() {
+
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
@@ -73,12 +74,15 @@ export class DaysFormFuture extends Component {
     }
         
     render() {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
                     <Grid.Column>
                         <Calendar 
+                            navigationLabel={({ date, view, label }) => `${months[date.getMonth()]}`}
                             minDate={this.state.formParams.mindate}
                             maxDate={this.state.formParams.maxdate}
                             minDetail={this.state.formParams.mindetail}
