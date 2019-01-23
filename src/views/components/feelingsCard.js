@@ -8,7 +8,7 @@ export class FeelingsCard extends Component {
             const dateObject = new Date(date)
             const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             const month = months[dateObject.getMonth()]
-            const numDay = dateObject.getDate()
+            const numDay = dateObject.getUTCDate()
             const year = dateObject.getFullYear()
 
         return month + ' ' + numDay + ', ' + year

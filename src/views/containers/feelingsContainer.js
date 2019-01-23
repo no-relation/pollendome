@@ -13,7 +13,6 @@ class _FeelingsContainer extends Component {
     }
 
     todaysFeeling = () => {
-        console.log(this.props.date.toJSON().slice(0,10))
         if (this.props.feelings.find((feel) => feel.day.fulldate === this.props.date.toJSON().slice(0, 10))) {
             return null
         } else {
