@@ -21,7 +21,7 @@ export class FeelingsCard extends Component {
                 list.push(key)
             }
         })
-        const limitedList = list.filter((item) => Number(day[item]) > 20)
+        const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a, b) => b - a)
 
         return sortedList.slice(0, 4)

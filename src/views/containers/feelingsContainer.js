@@ -9,14 +9,15 @@ class _FeelingsContainer extends Component {
 
     async componentDidMount() {
         await this.props.currentUser
-        this.props.getFeelings(this.props.currentUser.id)
+        await this.props.getFeelings(this.props.currentUser.id)
     }
 
     todaysFeeling = () => {
-        if (this.props.feelings.find((feel) => feel.fulldate === this.props.date.fulldate)) {
+        console.log(this.props.date.toJSON().slice(0,10))
+        if (this.props.feelings.find((feel) => feel.day.fulldate === this.props.date.toJSON().slice(0, 10))) {
             return null
         } else {
-            return <FeelingsForm />
+            return <FeelingsForm date={this.props.date} />
         }
     }
 

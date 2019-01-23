@@ -12,7 +12,7 @@ export const users_reducer = function(prevState = {}, action) {
             localStorage.removeItem("token")
             localStorage.setItem("currentUser", '')
             localStorage.setItem("feelings", '')
-            return {...prevState, currentUser: ''}
+            return {...prevState, currentUser: {}, feelings: []}
 
         case "RETURNING_USER":
             return { ...prevState, currentUser: action.payload}
