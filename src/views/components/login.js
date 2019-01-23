@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Container, Icon, Header, Message } from 'semantic-ui-react'
 import { user_actions } from '../../state/actions/user_actions';
 import { connect } from 'react-redux';
-import history from "../../state/history";
 
 class _Login extends Component {
 
