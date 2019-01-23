@@ -56,12 +56,12 @@ export class DaysFormFuture extends Component {
 
     state = {
         dates: [
-            new Date('3000-01-03'),
-            new Date('3000-01-31')
+            new Date('2019-01-03'),
+            new Date('2019-01-31')
         ],
         formParams: {
-            mindate: new Date("3000-01-01"),
-            maxdate: new Date("3000-12-31"),
+            mindate: new Date("2019-01-01"),
+            maxdate: new Date("2019-12-31"),
             mindetail: 'year',
         }
     }
@@ -82,7 +82,7 @@ export class DaysFormFuture extends Component {
                 <Grid relaxed columns={2}>
                     <Grid.Column>
                         <Calendar 
-                            navigationLabel={({ date, view, label }) => `${months[date.getMonth()]}`}
+                            navigationLabel={({ date }) => `${months[date.getMonth()]}`}
                             minDate={this.state.formParams.mindate}
                             maxDate={this.state.formParams.maxdate}
                             minDetail={this.state.formParams.mindetail}

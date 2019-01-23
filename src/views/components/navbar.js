@@ -86,7 +86,7 @@ export class NavBar extends Component {
                 onClick={this.handleItemClick}>
                     Past Data
                 </Menu.Item>
-                <Menu.Item 
+                <Menu.Item as={Link} to='/'
                 name='today' active={activeItem === 'today'} 
                 onClick={this.handleItemClick}>
                     {this.formatMonthDayYear(this.state.today)}

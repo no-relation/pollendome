@@ -12,9 +12,9 @@ class _User extends Component {
         showEdit: false
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(this.props.currentUser.id) {
-            this.props.getFeelings(this.props.currentUser.id)
+            await this.props.getFeelings(this.props.currentUser.id)
         }
     }
 
@@ -25,6 +25,10 @@ class _User extends Component {
                 editUser={this.props.editUser} />
             
         } else {
+            let areYouSneezy
+            if (this.props.currentUser.id === 3) {
+                areYouSneezy = true
+            }
             return(
                 <Container>
                     <Card >
@@ -36,10 +40,13 @@ class _User extends Component {
                             <Icon name='mail' />
                             {this.props.currentUser.email}
                         </Header>
+                        {areYouSneezy ? null :
+
                         <Button.Group>
                             <Button icon primary onClick={() => this.setState({ showEdit: true })}><Icon name="edit"/>Edit</Button>
                             <Button icon color='red' onClick={() => this.props.deleteUser(this.props.currentUser.id)}><Icon name="trash alternate"/>Delete</Button>
                         </Button.Group>
+                        }
                     </Card>
                     <br />
                     <FeelingsContainer currentUser={this.props.currentUser} feelings={this.props.feelings} date={this.state.date} />

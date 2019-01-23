@@ -21,15 +21,10 @@ export class Welcome extends Component {
             return (
                 <Container>
                     <Header>Welcome back, {this.props.currentUser.username}! </Header>
-                    {!this.props.feelings && <FeelingsForm date={this.state.date} />}
+                    {this.props.feelings.length === 0 && <FeelingsForm date={this.state.date} />}
                 </Container>
             )
         }
-    }
-
-    todaysFeelings = () => {
-        console.log('feelings', this.props.feelings)
-        // if (this.props.feelings && )
     }
     
     render() {

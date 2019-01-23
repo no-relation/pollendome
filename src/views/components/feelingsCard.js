@@ -8,7 +8,7 @@ export class FeelingsCard extends Component {
             const dateObject = new Date(date)
             const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             const month = months[dateObject.getMonth()]
-            const numDay = dateObject.getDate()
+            const numDay = dateObject.getUTCDate()
             const year = dateObject.getFullYear()
 
         return month + ' ' + numDay + ', ' + year
@@ -21,7 +21,7 @@ export class FeelingsCard extends Component {
                 list.push(key)
             }
         })
-        const limitedList = list.filter((item) => Number(day[item]) > 20)
+        const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a, b) => b - a)
 
         return sortedList.slice(0, 4)
@@ -29,29 +29,23 @@ export class FeelingsCard extends Component {
     }
     getSporeList = (day) => {
         const spores = this.getHighest(day, "pollen").concat(this.getHighest(day, "mold"))
+        const sporeIcon = (spore) => {
+            if (pollenOrMold(spore) === 'pollen') {
+                return <List.Icon name="tree" color="orange"/>
+            } else {
+                return <List.Icon name="theme" color="teal" />
+            }
+        } 
 
         return (
             spores.map((spore, index) => {
-                return <List.Item key={index} >{`${spore} (${day[spore]})`}</List.Item>
+                return <List.Item key={index} > 
+                    {sporeIcon(spore)}
+                    <List.Content> {`${spore} (${day[spore]})`} </List.Content>
+                </List.Item>
             })
         )
     }
-
-    // getSporeList = (day) => {
-    //     let list = []
-    //     Object.keys(day).forEach(key => {
-    //         if (['id', 'month', 'date', 'year', 'fulldate', 'created_at', 'updated_at'].indexOf(key) === -1) {
-    //             list.push(key)
-    //         }
-    //     })
-    //     const limitedList = list.filter((item) => Number(day[item]) > 20)
-    //     const topFive = limitedList.sort((a, b) => b - a).slice(0, 5)
-    //     return (
-    //         topFive.map((spore, index) => {
-    //             return <List.Item key={index} >{`${spore} (${day[spore]})`}</List.Item>
-    //         })
-    //     )
-    // }
 
     renderBadSporeList = () => {
         const spores = this.getSporeList(this.props.feeling.day)
@@ -62,8 +56,8 @@ export class FeelingsCard extends Component {
         } else {
             return (
                 <Container>
-                    <Card.Description>You might be allergic to:</Card.Description>
-                    <List bulleted>
+                    <Card.Description>You might be allergic to: (count/m³)</Card.Description>
+                    <List >
                         {spores}
                     </List>
                 </Container>
@@ -78,8 +72,8 @@ export class FeelingsCard extends Component {
         } else {
             return (
                 <Container>
-                    <Card.Description>You might not be allergic to:</Card.Description>
-                    <List bulleted>
+                    <Card.Description>You might not be allergic to: (count/m³)</Card.Description>
+                    <List>
                         {spores}
                     </List>
                 </Container>
@@ -101,6 +95,10 @@ export class FeelingsCard extends Component {
                     <Card.Header>{this.formatMonthDayYear(this.props.feeling.day.fulldate)} </Card.Header>
                     {isGoodFeeling ? this.renderNotBadSporeList() : this.renderBadSporeList()}
                 </Card.Content>
+                <Card.Meta>
+                    <Icon circular name="tree" color="orange" />pollen
+                    <Icon circular name="theme" color="teal" />mold
+                </Card.Meta>
             </Card>
         );
     }

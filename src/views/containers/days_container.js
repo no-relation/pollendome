@@ -15,7 +15,7 @@ class _DaysContainer extends Component {
                 <Container>
                     <Header>Get forecasts for coming days</Header>
                     <Chart days={this.props.days} />
-                    <Header.Subheader disabled>Average reading for a given day over past years</Header.Subheader>
+                    <Header.Subheader disabled>Average reading for a given day of the year</Header.Subheader>
                     <Divider />
                     <DaysFormFuture getDays={this.props.getDays} />
                 </Container>
