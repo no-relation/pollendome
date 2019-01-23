@@ -12,7 +12,7 @@ export class NavBar extends Component {
     formatMonthDayYear = (date) => {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         const month = months[date.getMonth()]
-        const numDay = date.getDate()
+        const numDay = date.getUTCDate()
         const year = date.getFullYear()
 
         return month + ' ' + numDay + ', ' + year
@@ -68,7 +68,7 @@ export class NavBar extends Component {
         const { activeItem } = this.state
 
         return (
-            <Menu inverted>
+            <Menu stackable fluid inverted>
                 <Menu.Item as={Link} to='/' 
                 name='home' active={activeItem === 'home'} 
                 onClick={this.handleItemClick}>
