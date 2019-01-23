@@ -21,10 +21,13 @@ export const users_reducer = function(prevState = {}, action) {
             return { ...prevState, error: action.payload}
 
         case "GET_DAYS":    
-            return {...prevState, days: action.payload}
+            return {...prevState, days: action.payload, isLoadingDays: false}
 
         case "GET_FEELINGS":    
             return {...prevState, feelings: action.payload}
+
+        case "LOADING":   
+            return {...prevState, isLoadingDays: true}
     
         default:
             return prevState

@@ -24,22 +24,23 @@ export class DaysFormPast extends Component {
     }
         
     render() {
-
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
-                    <Grid.Column>
-                        <Calendar 
-                            minDate={this.state.formParams.mindate}
-                            maxDate={this.state.formParams.maxdate}
-                            minDetail={this.state.formParams.mindetail}
-                            selectRange={true}
-                            onChange={this.handleOnChangeCalendar}
-                            value={this.state.dates}
-                            calendarType="US"
-                        />
-                    </Grid.Column>
+                    <div>
+                        <Grid.Column >    
+                            <Calendar responsive
+                                minDate={this.state.formParams.mindate}
+                                maxDate={this.state.formParams.maxdate}
+                                minDetail={this.state.formParams.mindetail}
+                                selectRange={true}
+                                onChange={this.handleOnChangeCalendar}
+                                value={this.state.dates}
+                                calendarType="US"
+                                />
+                        </Grid.Column>
+                    </div>
                     <Grid.Column>
                         <Form.Group widths='equal'>
                             <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString().slice(4, 15)} />

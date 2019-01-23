@@ -27,7 +27,6 @@ class _DaysContainer extends Component {
                 <Container>
                     <Header>See data for past dates</Header>
                     <Chart days={this.props.days} />
-                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                     <Divider />
                     <DaysFormPast getDays={this.props.getDays} />
                 </Container>

@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Icon } from 'semantic-ui-react';
 import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
+    
+    loadingOrDone = () => {
+        if (this.props.isLoading) {
+            return <Icon loading name="sun outline" size="huge" />
+        } else {
+            return (
+                <Container>
+                    <Line data={this.data(this.props.days)} />
+                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
+                </Container>
+            );
+        }
+    }
 
     render = () => {
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
                     <Line data={this.data(this.props.days)}/>
+                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
         } else {
@@ -86,7 +100,8 @@ class _Chart extends Component {
 
 
 const mapStateToProps = (state) => ({
-    days: state.days
+    days: state.days,
+    isLoading: state.isLoading
 })
 
 export const Chart = connect(mapStateToProps)(_Chart);
