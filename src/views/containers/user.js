@@ -12,9 +12,9 @@ class _User extends Component {
         showEdit: false
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(this.props.currentUser.id) {
-            this.props.getFeelings(this.props.currentUser.id)
+            await this.props.getFeelings(this.props.currentUser.id)
         }
     }
 

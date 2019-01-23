@@ -13,8 +13,10 @@ class _FeelingsContainer extends Component {
     }
 
     todaysFeeling = () => {
-        if (this.props.feelings.find((feel) => feel.fulldate !== this.props.date.fulldate)) {
-            return <FeelingsForm date={this.props.date} />
+        if (this.props.feelings.find((feel) => feel.fulldate === this.props.date.fulldate)) {
+            return null
+        } else {
+            return <FeelingsForm />
         }
     }
 
