@@ -32,6 +32,31 @@ A non-exhaustive list:
 
 ¹ it was not fun.
 
+4. Differences between Chrome and Firefox. When testing in different browsers, I discovered a couple differences in how each one renders JavaScript. 
+  - They implement the `sort` function differently when sorting strings. Consider this:
+```javascript
+["one","two"].sort((a,b)=>b-a)
+```
+
+ [According to the documentation,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) the sort is supposed to happen according to the character's Unicode value. As 't' has a higher value than 'o', you'd expect `sort` to reverse the order of "one" and "two".
+ When input in the console in Firefox, the return is:
+ ```Array [ "two", "one" ]```
+ In Chrome, though, you get: 
+ ```(2) ["one", "two"]```
+  So it seems like Firefox implements it correctly, but Chrome does not.
+ 
+- The implement the Date object differently. Consider:
+```javascript
+new Date("2019-02-31")
+```
+
+ There is no 31st of February. When trying this line in the Chrome browser, it returns:
+ ```Sat Mar 02 2019 18:00:00 GMT-0600 (Central Standard Time)```
+ But in Firefox:
+ ```Invalid Date```
+ So that was fun.²
+ 
+² It was not fun.
 
 # License
 This project is licensed under the [MIT License.](./LICENSE) 
