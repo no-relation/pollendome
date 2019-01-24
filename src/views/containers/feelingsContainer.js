@@ -26,7 +26,7 @@ class _FeelingsContainer extends Component {
                 <Container>
                     {this.todaysFeeling()}
                     <Divider />
-                    <Card.Group>
+                    <Card.Group centered>
                         {this.props.feelings.map(feeling => <FeelingsCard key={feeling.feeling.id} feeling={feeling} /> )}
                         {/* <Card link color='blue'>
                             <Card.Content>
