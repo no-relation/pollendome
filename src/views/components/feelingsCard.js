@@ -24,7 +24,7 @@ export class FeelingsCard extends Component {
         const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
 
-        return sortedList.slice(0, 4)
+        return sortedList.slice(0, 4).map(word => word.replace("_"," ").replace("___"," / "))
 
     }
     getSporeList = (day) => {
