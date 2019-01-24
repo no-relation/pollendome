@@ -7,7 +7,7 @@ export class DaysFormPast extends Component {
     state = {
         dates: [
             new Date('2015-02-01'),
-            new Date('2015-04-31')
+            new Date('2015-04-30')
         ],
         formParams: {
             mindate: new Date("2013-01-01"),
@@ -57,8 +57,8 @@ export class DaysFormFuture extends Component {
 
     state = {
         dates: [
-            new Date('2019-01-03'),
-            new Date('2019-01-31')
+            new Date('2019-04-24'),
+            new Date('2019-05-08')
         ],
         formParams: {
             mindate: new Date("2019-01-01"),

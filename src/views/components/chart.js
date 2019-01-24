@@ -67,9 +67,9 @@ class _Chart extends Component {
             }
         })
         const limitedList = list.filter((item) => Number(day[item]) > 0)
-        const sortedList = limitedList.sort((a,b) => b-a)
-
-        return sortedList.slice(0, 4)
+        
+        const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
+        return sortedList.slice(0, 4).map(word => word.replace("___", " / ").replace(/_/g, " "))
 
     }
     getSporeList = (day) => {
