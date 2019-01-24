@@ -54,6 +54,8 @@ new Date("2019-02-31")
  ```Sat Mar 02 2019 18:00:00 GMT-0600 (Central Standard Time)```
  But in Firefox:
  ```Invalid Date```
+ I suspect the difference comes from a built-in feature of Chrome that recalculates Date objects for your current time zone, which Firefox does not do.
+ 
  So that was fun.²
  
 ² It was not fun.
