@@ -24,7 +24,7 @@ export class FeelingsCard extends Component {
         const limitedList = list.filter((item) => Number(day[item]) > 0)
         const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
 
-        return sortedList.slice(0, 4).map(word => word.replace("_"," ").replace("___"," / "))
+        return sortedList.slice(0, 4)
 
     }
     getSporeList = (day) => {
@@ -41,7 +41,7 @@ export class FeelingsCard extends Component {
             spores.map((spore, index) => {
                 return <List.Item key={index} > 
                     {sporeIcon(spore)}
-                    <List.Content> {`${spore} (${day[spore]})`} </List.Content>
+                    <List.Content> {`${spore.replace("_", " ").replace("___", " / ")} (${day[spore]})`} </List.Content>
                 </List.Item>
             })
         )
