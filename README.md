@@ -45,7 +45,7 @@ A non-exhaustive list:
  ```(2) ["one", "two"]```
   So it seems like Firefox implements it correctly, but Chrome does not.
  
-- The implement the Date object differently. Consider:
+- They implement the Date object differently. Consider:
 ```javascript
 new Date("2019-02-31")
 ```
