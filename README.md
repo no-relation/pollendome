@@ -16,6 +16,7 @@ Data is stored in a PostgreSQL database, and served through an API built with Ru
 
 ## Features to come
 - Updating the database with daily count numbers
+- showing how actual numbers compare to the average overall and on a day
 - Aggregating anonymized user input data of how they feel day-to-day to make predictions better
 - Serve data from other cities and regions
 - Accepting data from a user's wearables (FitBit or Apple Watch, for example)
