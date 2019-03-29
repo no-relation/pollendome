@@ -41,7 +41,7 @@ export class FeelingsCard extends Component {
             spores.map((spore, index) => {
                 return <List.Item key={index} > 
                     {sporeIcon(spore)}
-                    <List.Content> {`${spore.replace("_", " ").replace("___", " / ")} (${day[spore]})`} </List.Content>
+                    <List.Content> {`${spore.replace("___", " / ").replace(/_/g, " ")} (${day[spore]})`} </List.Content>
                 </List.Item>
             })
         )
