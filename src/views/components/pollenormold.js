@@ -1,4 +1,4 @@
-
+// TODO: programmatically derive pollen or mold names from backend and database
 const pollenOrMold = (name) => {
    
     const mold_names = ["acrodictys", "agrocybe", "algae", "alternaria", "arthimium", "ascomycetes", "asperisporium", "basidiomycetes", "beltrania", "botrytis", "cercospora", "cladosporium", "curvularia", "d_conidia_hyphae", "dendryphiella", "drechslera_helmintho", "dichotomophthora", "diplococcum", "epicoccum", "fusariella", "ganoderma", "helicomina", "microsporum", "misc_fungus_hyaline", "monodictys", "myxomycete_smut", "nigrospora", "penicillium_aspergillus", "periconia", "pestalotiopsis", "pithomyces", "powdery_mildew", "pseudocercospora", "puccinia", "rust", "spegazinia", "stemphyllium", "tetrapola", "tilletia", "torula"]
