@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Header, Container, Icon, Button, Card, Label, Segment } from 'semantic-ui-react'
+import { Header, Container, Icon, Button, Card } from 'semantic-ui-react'
 import { UserForm } from "../components/userForm";
 import { user_actions } from '../../state/actions/user_actions';
 import { FeelingsContainer } from "./feelingsContainer";
