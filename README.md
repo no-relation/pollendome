@@ -33,7 +33,7 @@ A non-exhaustive list:
 
 ¹ it was not fun.
 
-4. Differences between Chrome and Firefox. When testing in different browsers, I discovered a couple differences in how each one renders JavaScript. 
+4. Differences between Chrome and Firefox. [I go into detail about this in a Medium blog post.](https://levelup.gitconnected.com/cross-browser-crazy-44e90d61b204) When testing in different browsers, I discovered a couple differences in how each one renders JavaScript. 
   - They implement the `sort` function differently when sorting strings. Consider this:
 ```javascript
 ["one","two"].sort((a,b)=>b-a)
