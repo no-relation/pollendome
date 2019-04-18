@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react';
-// import { Calendar } from 'react-calendar'
-import DateRangePicker from '@wojtekmaj/react-daterange-picker'
+import { Calendar } from 'react-calendar'
+// TODO: figure out how to get DateRangePicker to render right, or find something better
+// import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
 export class DaysFormPast extends Component {
 
@@ -17,39 +18,38 @@ export class DaysFormPast extends Component {
         }
     }
 
-    handleOnChange = dates => this.setState({ dates })
-    handleOnChangeStart = date => {
-        const dates = [date, this.state.dates[1]]
-        this.setState({ dates })
-    }
-    handleOnChangeEnd = date => {
-        const dates = [this.state.dates[0], date]
-        this.setState({ dates })
-    }
-        
+    handleOnChangeCalendar = date => this.setState({ dates: date })
+
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
     }
-        
+
     render() {
         return (
             <Form onSubmit={this.handleOnSubmit} >
-                {/* <Grid relaxed columns={2}>
-                    <Grid.Column> */}
-                        <DateRangePicker
-                            name="start"
-                            onChange={this.handleOnChange}
-                            value={this.state.dates}
-                            clearIcon={null}
-                            minDate={this.state.formParams.mindate}
-                            maxDate={this.state.formParams.maxdate}
-                            minDetail={this.state.formParams.mindetail}
-
-                        />
-                        <Form.Button color='blue'>Submit</Form.Button>
-                    {/* </Grid.Column>
-                </Grid> */}
+                <Form.Button color='blue'>Submit</Form.Button>
+                <Grid relaxed columns={2}>
+                    <div>
+                        <Grid.Column >
+                            <Calendar responsive
+                                minDate={this.state.formParams.mindate}
+                                maxDate={this.state.formParams.maxdate}
+                                minDetail={this.state.formParams.mindetail}
+                                selectRange={true}
+                                onChange={this.handleOnChangeCalendar}
+                                value={this.state.dates}
+                                calendarType="US"
+                            />
+                        </Grid.Column>
+                    </div>
+                    <Grid.Column>
+                        <Form.Group widths='equal'>
+                            <Form.Input readOnly fluid label="Start Date" value={this.state.dates[0].toDateString().slice(4, 15)} />
+                            <Form.Input readOnly fluid label="End Date" value={this.state.dates[1].toDateString().slice(4, 15)} />
+                        </Form.Group>
+                    </Grid.Column>
+                </Grid>
             </Form>
         );
     }
@@ -70,12 +70,12 @@ export class DaysFormFuture extends Component {
     }
 
     handleOnChangeCalendar = date => this.setState({ dates: date })
-        
+
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
     }
-        
+
     render() {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -84,7 +84,7 @@ export class DaysFormFuture extends Component {
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
                     <Grid.Column>
-                        {/* <Calendar 
+                        <Calendar
                             navigationLabel={({ date }) => `${months[date.getMonth()]}`}
                             minDate={this.state.formParams.mindate}
                             maxDate={this.state.formParams.maxdate}
@@ -93,7 +93,7 @@ export class DaysFormFuture extends Component {
                             onChange={this.handleOnChangeCalendar}
                             value={this.state.dates}
                             calendarType="US"
-                        /> */}
+                        />
                     </Grid.Column>
                     <Grid.Column>
                         <Form.Group widths='equal'>
