@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@wojtekmaj/react-daterange-picker": "^2.0.1",
     "chart.js": "^2.7.3",
     "react": "^16.7.0",
     "react-calendar": "^2.17.5",
     "react-chartjs-2": "^2.7.4",
+    "react-date-picker": "^7.2.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",

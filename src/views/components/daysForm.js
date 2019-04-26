@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react';
 import { Calendar } from 'react-calendar'
+// TODO: figure out how to get DateRangePicker to render right, or find something better
+// import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
 export class DaysFormPast extends Component {
 
@@ -17,19 +19,19 @@ export class DaysFormPast extends Component {
     }
 
     handleOnChangeCalendar = date => this.setState({ dates: date })
-        
+
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
     }
-        
+
     render() {
         return (
             <Form onSubmit={this.handleOnSubmit} >
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
                     <div>
-                        <Grid.Column >    
+                        <Grid.Column >
                             <Calendar responsive
                                 minDate={this.state.formParams.mindate}
                                 maxDate={this.state.formParams.maxdate}
@@ -38,7 +40,7 @@ export class DaysFormPast extends Component {
                                 onChange={this.handleOnChangeCalendar}
                                 value={this.state.dates}
                                 calendarType="US"
-                                />
+                            />
                         </Grid.Column>
                     </div>
                     <Grid.Column>
@@ -57,23 +59,23 @@ export class DaysFormFuture extends Component {
 
     state = {
         dates: [
-            new Date('2019-04-24'),
-            new Date('2019-05-08')
+            new Date('2000-04-24'),
+            new Date('2000-05-08')
         ],
         formParams: {
-            mindate: new Date("2019-01-01"),
-            maxdate: new Date("2019-12-31"),
+            mindate: new Date("2000-01-01"),
+            maxdate: new Date("2000-12-31"),
             mindetail: 'year',
         }
     }
 
     handleOnChangeCalendar = date => this.setState({ dates: date })
-        
+
     handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.getDays(this.state)
     }
-        
+
     render() {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -82,7 +84,7 @@ export class DaysFormFuture extends Component {
                 <Form.Button color='blue'>Submit</Form.Button>
                 <Grid relaxed columns={2}>
                     <Grid.Column>
-                        <Calendar 
+                        <Calendar
                             navigationLabel={({ date }) => `${months[date.getMonth()]}`}
                             minDate={this.state.formParams.mindate}
                             maxDate={this.state.formParams.maxdate}
