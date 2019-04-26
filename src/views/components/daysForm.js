@@ -59,12 +59,12 @@ export class DaysFormFuture extends Component {
 
     state = {
         dates: [
-            new Date('2019-04-24'),
-            new Date('2019-05-08')
+            new Date('2000-04-24'),
+            new Date('2000-05-08')
         ],
         formParams: {
-            mindate: new Date("2019-01-01"),
-            maxdate: new Date("2019-12-31"),
+            mindate: new Date("2000-01-01"),
+            maxdate: new Date("2000-12-31"),
             mindetail: 'year',
         }
     }
