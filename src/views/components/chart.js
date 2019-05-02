@@ -5,21 +5,11 @@ import { Header, Container, Icon } from 'semantic-ui-react';
 import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
-    
-    loadingOrDone = () => {
-        if (this.props.isLoading) {
-            return <Icon loading name="sun outline" size="huge" />
-        } else {
-            return (
-                <Container>
-                    <Line data={this.data(this.props.days)} />
-                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
-                </Container>
-            );
-        }
-    }
 
     render = () => {
+        if (this.props.isLoading) {
+            return <Icon loading name="sun outline" size="huge" />
+        }
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
@@ -59,6 +49,7 @@ class _Chart extends Component {
         }
     }
 
+    // 5 highest species of pollen or mold
     getHighest = (day, sporeType) => {
         let list = []
         Object.keys(day).forEach( key => {
@@ -70,8 +61,8 @@ class _Chart extends Component {
         
         const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
         return sortedList.slice(0, 4).map(word => word.replace("___", " / ").replace(/_/g, " "))
-
     }
+    
     getSporeList = (day) => {
         const pollens = this.getHighest(day, "pollen")
         const molds = this.getHighest(day, "mold")
@@ -79,6 +70,7 @@ class _Chart extends Component {
         return pollens.concat(molds)
     }
 
+    // build data object for passing into line chart
     data = (days) => {
         if (days && days.length > 0) {
             return ({
