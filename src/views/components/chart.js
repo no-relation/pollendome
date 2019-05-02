@@ -34,7 +34,6 @@ class _Chart extends Component {
             // red
             colorhue = 360
         }
-        console.log(spore, ':', pollenOrMold(spore))
         return {
             label: spore.replace("___", " / ").replace(/_/g, " "),
             yAxisID: pollenOrMold(spore),
@@ -96,11 +95,19 @@ class _Chart extends Component {
                 yAxes: [{
                     id: "pollen",
                     type: 'linear',
-                    position: 'left'
+                    position: 'left',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Pollen count'
+                    }
                 }, {
                     id: "mold",
                     type: 'linear',
-                    position: 'right'
+                    position: 'right',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Mold count'
+                    }
                 }]
             }
     }
