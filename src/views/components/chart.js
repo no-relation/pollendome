@@ -91,7 +91,7 @@ class _Chart extends Component {
 
     // chartjs options
     // TODO: color axes for low, medium, high levels
-    // TODO: do something with the legend box
+    // TODO: do something with the legend box: https://www.chartjs.org/docs/latest/configuration/legend.html
     options = {
             scales: {
                 yAxes: [{
