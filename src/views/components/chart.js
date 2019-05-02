@@ -5,25 +5,15 @@ import { Header, Container, Icon } from 'semantic-ui-react';
 import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
-    
-    loadingOrDone = () => {
-        if (this.props.isLoading) {
-            return <Icon loading name="sun outline" size="huge" />
-        } else {
-            return (
-                <Container>
-                    <Line data={this.data(this.props.days)} />
-                    <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
-                </Container>
-            );
-        }
-    }
 
     render = () => {
+        if (this.props.isLoading) {
+            return <Icon loading name="sun outline" size="huge" />
+        }
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
-                    <Line data={this.data(this.props.days)}/>
+                    <Line data={this.data(this.props.days)} options={this.options}/>
                     <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
@@ -44,9 +34,9 @@ class _Chart extends Component {
             // red
             colorhue = 360
         }
-
         return {
-            label: spore,
+            label: spore.replace("___", " / ").replace(/_/g, " "),
+            yAxisID: pollenOrMold(spore),
             data: daySet.map((day) => {
                 const value = Number(day[`${spore}`])
                 if (isNaN(value)) {
@@ -59,6 +49,7 @@ class _Chart extends Component {
         }
     }
 
+    // 5 highest species of pollen or mold
     getHighest = (day, sporeType) => {
         let list = []
         Object.keys(day).forEach( key => {
@@ -69,9 +60,9 @@ class _Chart extends Component {
         const limitedList = list.filter((item) => Number(day[item]) > 0)
         
         const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
-        return sortedList.slice(0, 4).map(word => word.replace("___", " / ").replace(/_/g, " "))
-
+        return sortedList.slice(0, 4)
     }
+
     getSporeList = (day) => {
         const pollens = this.getHighest(day, "pollen")
         const molds = this.getHighest(day, "mold")
@@ -79,6 +70,7 @@ class _Chart extends Component {
         return pollens.concat(molds)
     }
 
+    // build data object for passing into line chart
     data = (days) => {
         if (days && days.length > 0) {
             return ({
@@ -95,7 +87,35 @@ class _Chart extends Component {
                 datasets: []
             })
         }
-    };
+    }
+
+    // chartjs options
+    // TODO: color axes for low, medium, high levels
+    // TODO: do something with the legend box: https://www.chartjs.org/docs/latest/configuration/legend.html
+    options = {
+            scales: {
+                yAxes: [{
+                    id: "pollen",
+                    type: 'linear',
+                    position: 'left',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Pollen count'
+                    }
+                }, {
+                    id: "mold",
+                    type: 'linear',
+                    position: 'right',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Mold count'
+                    }
+                }]
+            },
+            legend: {
+                
+            }
+    }
 }
 
 
