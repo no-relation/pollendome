@@ -90,6 +90,8 @@ class _Chart extends Component {
     }
 
     // chartjs options
+    // TODO: color axes for low, medium, high levels
+    // TODO: do something with the legend box
     options = {
             scales: {
                 yAxes: [{
@@ -109,6 +111,9 @@ class _Chart extends Component {
                         labelString: 'Mold count'
                     }
                 }]
+            },
+            legend: {
+                
             }
     }
 }
