@@ -13,7 +13,7 @@ class _Chart extends Component {
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
-                    <Line data={this.data(this.props.days)}/>
+                    <Line data={this.data(this.props.days)} options={this.options}/>
                     <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
                 );
@@ -34,9 +34,10 @@ class _Chart extends Component {
             // red
             colorhue = 360
         }
-
+        console.log(spore, ':', pollenOrMold(spore))
         return {
-            label: spore,
+            label: spore.replace("___", " / ").replace(/_/g, " "),
+            yAxisID: pollenOrMold(spore),
             data: daySet.map((day) => {
                 const value = Number(day[`${spore}`])
                 if (isNaN(value)) {
@@ -60,9 +61,9 @@ class _Chart extends Component {
         const limitedList = list.filter((item) => Number(day[item]) > 0)
         
         const sortedList = limitedList.sort((a, b) => Number(day[b]) - Number(day[a]))
-        return sortedList.slice(0, 4).map(word => word.replace("___", " / ").replace(/_/g, " "))
+        return sortedList.slice(0, 4)
     }
-    
+
     getSporeList = (day) => {
         const pollens = this.getHighest(day, "pollen")
         const molds = this.getHighest(day, "mold")
@@ -87,7 +88,22 @@ class _Chart extends Component {
                 datasets: []
             })
         }
-    };
+    }
+
+    // chartjs options
+    options = {
+            scales: {
+                yAxes: [{
+                    id: "pollen",
+                    type: 'linear',
+                    position: 'left'
+                }, {
+                    id: "mold",
+                    type: 'linear',
+                    position: 'right'
+                }]
+            }
+    }
 }
 
 
