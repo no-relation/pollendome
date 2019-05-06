@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2'
-import { Header, Container, Icon } from 'semantic-ui-react';
+import { Header, Container, Icon, Button } from 'semantic-ui-react';
 import { pollenOrMold } from './pollenormold';
 
 class _Chart extends Component {
+
+    state = {
+        hidePollen: false,
+        hideMold: false
+    }
+
+    handleGraphClick = (e) => {
+        this.setState({ [e.target.id]: !this.state[e.target.id] })
+    }
 
     render = () => {
         if (this.props.isLoading) {
@@ -13,6 +22,11 @@ class _Chart extends Component {
         if (this.props.days && this.props.days.length !== 0) {
             return (
                 <Container>
+                    <Button.Group size='tiny' labeled icon >
+                        <Button toggle active={!this.state.hidePollen} onClick={this.handleGraphClick} id='hidePollen' icon='tree' content='Pollen' labelPosition='right'/>
+                        <Button.Or />
+                        <Button toggle active={!this.state.hideMold} onClick={this.handleGraphClick} id='hideMold' icon='theme' content='Mold' labelPosition='right'/>
+                    </Button.Group>
                     <Line data={this.data(this.props.days)} options={this.options}/>
                     <Header.Subheader disabled>Readings are not available for all days</Header.Subheader>
                 </Container>
@@ -26,17 +40,25 @@ class _Chart extends Component {
         let colorhue;
         if (pollenOrMold(spore) === 'mold'){
             // teal, blue, purple
-            colorhue = Math.floor(Math.random() * 125 + 175)
+            colorhue = Math.floor(Math.random() * 75 + 200)
         } else if (pollenOrMold(spore) === 'pollen') {
             // red to green
-            colorhue = Math.floor(Math.random() * 125)
+            colorhue = Math.floor(Math.random() * 75)
         } else {
             // red
             colorhue = 360
         }
+        let hidden = false;
+        if (pollenOrMold(spore) ==='pollen'){
+            hidden = this.state.hidePollen
+        }
+        if (pollenOrMold(spore) ==='mold'){
+            hidden = this.state.hideMold
+        }
         return {
             label: spore.replace("___", " / ").replace(/_/g, " "),
             yAxisID: pollenOrMold(spore),
+            hidden: hidden,
             data: daySet.map((day) => {
                 const value = Number(day[`${spore}`])
                 if (isNaN(value)) {
@@ -66,7 +88,6 @@ class _Chart extends Component {
     getSporeList = (day) => {
         const pollens = this.getHighest(day, "pollen")
         const molds = this.getHighest(day, "mold")
-
         return pollens.concat(molds)
     }
 
@@ -92,6 +113,7 @@ class _Chart extends Component {
     // chartjs options
     // TODO: color axes for low, medium, high levels
     // TODO: do something with the legend box: https://www.chartjs.org/docs/latest/configuration/legend.html
+    // TODO: add tooltips on hover talking describing each species
     options = {
             scales: {
                 yAxes: [{
