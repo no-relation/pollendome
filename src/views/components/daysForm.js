@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react';
 import { Calendar } from 'react-calendar'
+// TODO: refactor into one function
 // TODO: figure out how to get DateRangePicker to render right, or find something better
 // import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
