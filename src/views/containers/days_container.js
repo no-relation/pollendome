@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Divider, Header } from 'semantic-ui-react';
-import { DaysFormPast } from '../components/daysForm';
-import { DaysFormFuture } from '../components/daysForm';
+import { DaysFormPast, DaysFormFuture } from '../components/daysForm';
 import { connect } from 'react-redux';
 import { days_actions } from '../../state/actions/days_actions';
 import { Chart } from '../components/chart';

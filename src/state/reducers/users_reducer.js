@@ -26,6 +26,12 @@ export const users_reducer = function(prevState = {}, action) {
         case "GET_FEELINGS":    
             return {...prevState, feelings: action.payload}
 
+        case "GET_SPECIES":
+            return { ...prevState, species: action.payload}
+        
+        case "GET_ALL_SPECIES":
+            return { ...prevState, specieses: action.payload}
+
         case "LOADING":   
             return {...prevState, isLoadingDays: true}
     
