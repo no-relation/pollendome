@@ -21,9 +21,8 @@ export const days_actions = {
                     .then(species => dispatch({ type: "GET_SPECIES", payload: species }))
             }
         } else {
-            console.log('fetching species')
             return function (dispatch) {
-                fetch(`${API}/species/index`)
+                fetch(`${API}/species`)
                     .then(resp => resp.json())
                     .then(specieses => dispatch({ type: "GET_ALL_SPECIES", payload: specieses }))
             }
