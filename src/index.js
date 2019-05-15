@@ -9,12 +9,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from "./state/reducers/index";
 import { initialState } from './state/initial';
 import 'semantic-ui-css/semantic.min.css'
+import { store } from './state/store';
 
-const middleware = compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-const store = createStore(rootReducer, initialState, middleware)
+// const middleware = compose(
+//     applyMiddleware(thunk),
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// )
+// const store = createStore(rootReducer, initialState, middleware)
 
 ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById('root'));
 
