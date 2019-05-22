@@ -13,19 +13,11 @@ export const days_actions = {
         }
     },
 
-    getSpecies(params) {
-        if (params) {
-            return function (dispatch) {
-                fetch(`${API}/species/find/${params}`)
-                    .then(resp => resp.json())
-                    .then(species => dispatch({ type: "GET_SPECIES", payload: species }))
-            }
-        } else {
-            return function (dispatch) {
-                fetch(`${API}/species`)
-                    .then(resp => resp.json())
-                    .then(specieses => dispatch({ type: "GET_ALL_SPECIES", payload: specieses }))
-            }
+    getSpecies() {
+        return function (dispatch) {
+            fetch(`${API}/species`)
+                .then(resp => resp.json())
+                .then(species => dispatch({ type: "GET_ALL_SPECIES", payload: species }))
         }
-    },
+    }
 }
