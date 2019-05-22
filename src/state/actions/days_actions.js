@@ -17,7 +17,7 @@ export const days_actions = {
         return function (dispatch) {
             fetch(`${API}/species`)
                 .then(resp => resp.json())
-                .then(specieses => dispatch({ type: "GET_ALL_SPECIES", payload: specieses }))
+                .then(species => dispatch({ type: "GET_ALL_SPECIES", payload: species }))
         }
     }
 }
