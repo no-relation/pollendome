@@ -3,7 +3,7 @@
 import { days_actions } from '../../state/actions/days_actions';
 import { store } from '../../state/store';
 
-export const pollenOrMold = async (name) => {
+export const pollenOrMold = (name) => {
    
     // const mold_names = ["acrodictys", "agrocybe", "algae", "alternaria", "arthimium", "ascomycetes", "asperisporium", "basidiomycetes", "beltrania", "botrytis", "cercospora", "cladosporium", "curvularia", "d_conidia_hyphae", "dendryphiella", "drechslera_helmintho", "dichotomophthora", "diplococcum", "epicoccum", "fusariella", "ganoderma", "helicomina", "microsporum", "misc_fungus_hyaline", "monodictys", "myxomycete_smut", "nigrospora", "penicillium_aspergillus", "periconia", "pestalotiopsis", "pithomyces", "powdery_mildew", "pseudocercospora", "puccinia", "rust", "spegazinia", "stemphyllium", "tetrapola", "tilletia", "torula"]
     
@@ -21,8 +21,8 @@ export const pollenOrMold = async (name) => {
 
     const state = store.getState()
 
-    if (!state.specieses) {
-        store.dispatch(await days_actions.getSpecies(name))
+    if (!state.species) {
+        store.dispatch(days_actions.getSpecies(name))
     }
 
     // need to add an await here?
